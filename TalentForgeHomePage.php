@@ -1,4 +1,4 @@
-//fuck this project
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -141,5 +141,4 @@
     </div>
 </body>
 </html>
-//s
 
