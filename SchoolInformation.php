@@ -1,6 +1,39 @@
-
 <?php
- //Connection to database
+// Connection to database
+$servername="localhost";
+$username="root";
+$password ="";
+$db="talentforge";
+$conn = mysqli_connect($servername, $username, $password, $db);
+if (!$conn){
+die("Connection fa1led:" . mysqli_connect_error ());
+}
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve username and password from the form
+	$email = $_POST["email"];
+	$pass = $_POST["password"];
+	$skill1 = $_POST["skill1"];
+    $skill2 = $_POST["skill2"];
+	$ruid = $_POST["ruid"];
+    // Validate and sanitize user inputs (you should enhance this based on your requirements)
+    $skill1 = mysqli_real_escape_string($conn, $skill1);
+    $skill2 = mysqli_real_escape_string($conn, $skill2);
+
+    $sql = "INSERT INTO tblskills (RUID,Skill1,Skill2) VALUES
+	('$ruid','$skill1','$skill2')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Registration successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+$conn->close();// Close connection
+?>
+<?php
+/*  //Connection to database
 $servername="localhost";
 $username="root";
 $password ="";
@@ -28,8 +61,47 @@ if ($result->num_rows > 0) {
 
 // Close the connection
 $conn->close();
-
+ */
 ?>
+
+<?php
+/* // Connection to database
+$servername="localhost";
+$username="root";
+$password ="";
+$db="talentforge";
+$conn = mysqli_connect($servername, $username, $password, $db);
+if (!$conn){
+die("Connection fa1led:" . mysqli_connect_error ());
+}
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve username and password from the form
+	$skill1 = $_POST["skill1"];
+	$skill2 = $_POST["skill2"];
+
+    // Validate and sanitize user inputs (you should enhance this based on your requirements)
+    $skill1 = mysqli_real_escape_string($conn, $skill1);
+    $skill2 = mysqli_real_escape_string($conn, $skill2);
+
+
+    // Insert data into the database (replace 'your_table' with your actual table name)
+    $sql = "INSERT INTO tblskills (skill2,skill2) VALUES
+	('skill1','skill2')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Registration successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+// Close the database connection
+mysqli_close($conn); */
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +166,7 @@ $conn->close();
     <title>Form</title>
 </head>
 <body>
-		            <form name="SchoolInformationdetails" action="HigherEducation.php" method="POST" enctype="multipart/formdata">
+		            <form name="SchoolInformationdetails" action="HigherEducation.php" method="POST">
 
 	        <div class="tile">
             <h2>Tile 4: School Information</h2>
@@ -108,61 +180,52 @@ $conn->close();
                 <input type="text" id="finalYear" name="finalYear">
 
 				
-				<!-- Subject 1 -->
         <label for="subject1">Subject 1:</label>
-        <input type="text" id="subject1" name="subjects[]" required>
+        <input type="text" id="subject1" name="subject1" required>
 
         <label for="mark1">Mark 1:</label>
-        <input type="text" id="mark1" name="marks[]" required>
+        <input type="text" id="mark1" name="mark1" required>
 
-        <!-- Subject 2 -->
         <label for="subject2">Subject 2:</label>
-        <input type="text" id="subject2" name="subjects[]" required>
+        <input type="text" id="subject2" name="subject2" required>
 
         <label for="mark2">Mark 2:</label>
-        <input type="text" id="mark2" name="marks[]" required>
+        <input type="text" id="mark2" name="mark2" required>
 
-        <!-- Subject 3 -->
         <label for="subject3">Subject 3:</label>
-        <input type="text" id="subject3" name="subjects[]" required>
+        <input type="text" id="subject3" name="subject3" required>
 
         <label for="mark3">Mark 3:</label>
-        <input type="text" id="mark3" name="marks[]" required>
+        <input type="text" id="mark3" name="mark3" required>
 
-<!-- Subject 4 -->
         <label for="subject1">Subject 4:</label>
-        <input type="text" id="subject4" name="subjects[]" required>
+        <input type="text" id="subject4" name="subject4" required>
 
-        <label for="mark1">Mark 4:</label>
-        <input type="text" id="mark4" name="marks[]" required>
+        <label for="mark4">Mark 4:</label>
+        <input type="text" id="mark4" name="mark4" required>
 
-        <!-- Subject 2 -->
         <label for="subject2">Subject 5:</label>
-        <input type="text" id="subject5" name="subjects[]" required>
+        <input type="text" id="subject5" name="subject5" required>
 
         <label for="mark2">Mark 5:</label>
-        <input type="text" id="mark5" name="marks[]" required>
+        <input type="text" id="mark5" name="mark5" required>
 
         <!-- Subject 3 -->
         <label for="subject3">Subject 6:</label>
-        <input type="text" id="subject6" name="subjects[]" required>
+        <input type="text" id="subject6" name="subject6" required>
 
         <label for="mark3">Mark 6:</label>
-        <input type="text" id="mark6" name="marks[]" required>
+        <input type="text" id="mark6" name="mark6" required>
 
 <!-- Subject 1 -->
         <label for="subject1">Subject 7:</label>
-        <input type="text" id="subject7" name="subjects[]" required>
+        <input type="text" id="subject7" name="subject7" required>
 
         <label for="mark1">Mark 7:</label>
-        <input type="text" id="mark7" name="marks[]" required>
-		
-						<input type="hidden" name="email" value="<?php echo $email;?>">
+        <input type="text" id="mark7" name="mark7" required>
+				<input type="hidden" name="email" value="<?php echo $email;?>">
 				<input type="hidden" name="password" value="<?php echo $password;?>">
-
-
-
-
+		<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
         </div>
 		
  <input type="submit" value="Submit">
@@ -175,7 +238,7 @@ $conn->close();
 
 <?php
 error_reporting(0);
-		$lastSchool = $_POST["lastSchool"];
+/* 		$lastSchool = $_POST["lastSchool"];
 				$highestGrade = $_POST["highestGrade"];
 				
 				$finalYear = $_POST["finalYear"];
@@ -197,11 +260,11 @@ error_reporting(0);
 		$sub7 = $_POST["subject7"];
 	$mrk7 = $_POST["mark7"];
 
-    $Check=True;
+    $Check=True; */
 ?>
 
 <?php
-//Inserting Vaild data
+/* //Inserting Vaild data
 if ($Check===True){
 
 $sql= "INSERT INTO tblskills (RUID,LastSchoolAttended, HighestGradePassed, FinalYear, Subject1, Mark1, Subject2, Mark2, Subject3, Mark3, Subject4, Mark4, Subject5, Mark5, Subject6, Mark6, Subject7, Mark7) 
@@ -219,3 +282,5 @@ mysqli_close($conn);
  //Non Vaild data
  echo '<script>alert("Please Enter Correct Details")</script>';
 }
+ */
+?>

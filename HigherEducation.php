@@ -1,6 +1,5 @@
-
 <?php
- //Connection to database
+// Connection to database
 $servername="localhost";
 $username="root";
 $password ="";
@@ -9,26 +8,62 @@ $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
 }
-?>
-<?php
-//to get ruid use email and password from createRegAccount
-$email = $_POST['email'];
-$password = $_POST['password'];
 
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve username and password from the form
+	$email = $_POST["email"];
+	$pass = $_POST["password"];
+	$ruid = $_POST["ruid"];
+	$lastSchool = $_POST["lastSchool"];
+	$highestGrade = $_POST["highestGrade"];	
+	$finalYear = $_POST["finalYear"];
+	$sub1 = $_POST["subject1"];
+	$mrk1 = $_POST["mark1"];
+	$sub2 = $_POST["subject2"];
+	$mrk2 = $_POST["mark2"];
+	$sub3 = $_POST["subject3"];
+	$mrk3 = $_POST["mark3"];
+	$sub4 = $_POST["subject4"];
+	$mrk4 = $_POST["mark4"];
+	$sub5 = $_POST["subject5"];
+	$mrk5 = $_POST["mark5"];
+	$sub6 = $_POST["subject6"];
+	$mrk6 = $_POST["mark6"];
+	$sub7 = $_POST["subject7"];
+	$mrk7 = $_POST["mark7"];
+    // Validate and sanitize user inputs (you should enhance this based on your requirements)
+    $lastSchool = mysqli_real_escape_string($conn, $lastSchool);
+    $highestGrade = mysqli_real_escape_string($conn, $highestGrade);
+	$finalYear = mysqli_real_escape_string($conn, $finalYear);
+		$sub1 = mysqli_real_escape_string($conn, $sub1);
+		$mrk1 = mysqli_real_escape_string($conn, $mrk1);
+		$sub2 = mysqli_real_escape_string($conn, $sub2);
+		$mrk2 = mysqli_real_escape_string($conn, $mrk2);
+		$sub3 = mysqli_real_escape_string($conn, $sub3);
+		$mrk3 = mysqli_real_escape_string($conn, $mrk3);
+		$sub4 = mysqli_real_escape_string($conn, $sub4);
+		$mrk4 = mysqli_real_escape_string($conn, $mrk4);
+		$sub5 = mysqli_real_escape_string($conn, $sub5);
+		$mrk5 = mysqli_real_escape_string($conn, $mrk5);
+		$sub6 = mysqli_real_escape_string($conn, $sub6);
+		$mrk6 = mysqli_real_escape_string($conn, $mrk6);
+		$sub7 = mysqli_real_escape_string($conn, $sub7);
+		$mrk7 = mysqli_real_escape_string($conn, $mrk7);
 
-// Construct the SQL query
-$sql = "SELECT RUID FROM tblregusers WHERE Email = '$email' AND Password = '$password'";
- mysqli_query($conn,$sql);
+    $sql = "INSERT INTO tblschoolinfo (RUID,LastSchoolAttended,HighestGradePassed,FinalYear, 
+	Subject1, Mark1, Subject2, Mark2, Subject3, Mark3, Subject4, Mark4, Subject5, Mark5, 
+	Subject6, Mark6, Subject7, Mark7)
+        VALUES ('$ruid','$lastSchool', '$highestGrade', '$finalYear', '$sub1', '$mrk1', '$sub2', '$mrk2',
+		'$sub3', '$mrk3', '$sub4', '$mrk4', '$sub5', '$mrk5', '$sub6', '$mrk6', '$sub7', '$mrk7')";
 
-// Check if a matching record was found
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $ruid = $row['RUID'];
-} 
-
-// Close the connection
-$conn->close();
-
+    if (mysqli_query($conn, $sql)) {
+        echo "Registration successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+$conn->close();// Close connection
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +131,7 @@ $conn->close();
 <body>
 
 
-    <form action="EmployeeHistory.php" method="POST" >
+    <form  name="HigerEducation" action="EmployeeHistory.php" method="POST" >
 		
 
                
@@ -113,7 +148,9 @@ $conn->close();
 				 <Input type = 'Radio' Name ='Completed' value='Yes'>Yes<Input type = 'Radio' Name ='Completed' value= 'NO'>NO
 				 
 						<input type="hidden" name="email" value="<?php echo $email;?>">
-				<input type="hidden" name="password" value="<?php echo $password;?>">
+						<input type="hidden" name="password" value="<?php echo $password;?>">
+						<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
+
 				
 				 <input type="submit" value="Submit">
     </form>
@@ -122,7 +159,7 @@ $conn->close();
 </html>
 
 <?php
- //Connection to database
+ /* //Connection to database
 $servername="localhost";
 $username="root";
 $password ="";
@@ -137,9 +174,6 @@ die("Connection fa1led:" . mysqli_connect_error ());
 error_reporting(0);
 //Retrieving Data
 
-    $lastSchool = $_POST["lastSchool"];
-    $highestGrade = $_POST["highestGrade"];
-    $finalYear = $_POST["finalYear"];
     $collegeName = $_POST["collegeName"];
     $fieldOfStudy = $_POST["fieldOfStudy"];
     $active = $_POST["Active"];
@@ -166,5 +200,5 @@ mysqli_close($conn);
  else{
  //Non Vaild data
  echo '<script>alert("Please Enter Correct Details")</script>';
-}
+} */
 ?>

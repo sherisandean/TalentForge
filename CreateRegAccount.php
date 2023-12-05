@@ -1,3 +1,19 @@
+<?php
+error_reporting(0);
+//Retrieving Data
+	/* $name = $_POST["name"];
+    $surname = $_POST["surname"];
+    $gender = $_POST["gender"];
+    $maritalStatus = $_POST["MaritalStatus"];
+    $contactNumber = $_POST["contactNumber"];
+    $email = $_POST["email"];
+	$password = $_POST["password"];
+    $residentialAddress = $_POST["residentialAddress"];
+    $postalAddress = $_POST["postalAddress"];
+	$ruid=4;
+    $Check=True;
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +81,7 @@
     <div class="container">
         <div class="tile">
             <h2>Tile 1: User Information</h2>
-            <form name="Personaldetails" action="skills.php" method="POST" enctype="multipart/formdata">
+            <form name="Personaldetails" action="skills.php" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name">
 
@@ -89,7 +105,7 @@
                 <input type="text" id="email" name="email">
 				
 				<label for="password">Password :</label>
-                <input type="password" id="password" name="password">
+                <input type="text" id="pass" name="pass">
 
                 <label for="residentialAddress">Residential Address:</label>
                 <input type="text" id="residentialAddress" name="residentialAddress">
@@ -104,7 +120,7 @@
 </body>
 </html>
 <?php
- //Connection to database
+/*  //Connection to database
 $servername="localhost";
 $username="root";
 $password ="";
@@ -113,29 +129,18 @@ $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
 }
-?>
 
-<?php
-error_reporting(0);
-//Retrieving Data
-	$name = $_POST["name"];
-    $surname = $_POST["surname"];
-    $gender = $_POST["gender"];
-    $maritalStatus = $_POST["MaritalStatus"];
-    $contactNumber = $_POST["contactNumber"];
-    $email = $_POST["email"];
-	$password = $_POST["password"];
-    $residentialAddress = $_POST["residentialAddress"];
-    $postalAddress = $_POST["postalAddress"];
-    $Check=False;
+
 
 ?>
+
+
 
 <?php
 //Inserting Vaild data
 if ($Check===True){
-$sql= "INSERT INTO tblregusers (Name, Surname, Gender, MaritalStatus, ComtactNum, Email, ResAddress, PostalAddress)
-        VALUES ('$name', '$surname', '$gender', '$maritalStatus', '$contactNumber', '$email', '$residentialAddress', '$postalAddress')";
+$sql= "INSERT INTO tblregusers (RUID,Name, Surname, Gender, MaritalStatus, ComtactNum, Email, ResAddress, PostalAddress)
+       VALUES ('$ruid','$name', '$surname', '$gender', '$maritalStatus', '$contactNumber', '$email', '$residentialAddress', '$postalAddress')";
 
 if (mysqli_query($conn,$sql)){
  echo "Succesfull";
@@ -148,5 +153,9 @@ mysqli_close($conn);
  else{
  //Non Vaild data
  echo '<script>alert("Please Enter Correct Details")</script>';
-}
+} */
 ?>
+
+
+
+

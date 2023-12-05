@@ -9,24 +9,24 @@ if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
 }
 
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$email = $_POST["email"];
-	$pass = $_POST["password"];
+
 	$ruid = $_POST["ruid"];
     // Retrieve username and password from the form
-    $collegeName = $_POST["collegeName"];
-    $fieldOfStudy = $_POST["fieldOfStudy"];
-    $active = $_POST["Active"];
-    $completed = $_POST["Completed"];
+    $companyName = $_POST["companyName"];
+    $position = $_POST["position"];
+    $reference = $_POST["reference"];
+    $referenceContact = $_POST["referenceContact"];
     // Validate and sanitize user inputs (you should enhance this based on your requirements)
-    $collegeName = mysqli_real_escape_string($conn, $collegeName);
-    $fieldOfStudy = mysqli_real_escape_string($conn, $fieldOfStudy);
-	$active = mysqli_real_escape_string($conn, $active);
-		$completed = mysqli_real_escape_string($conn, $completed);
+    $companyName = mysqli_real_escape_string($conn, $companyName);
+    $position = mysqli_real_escape_string($conn, $position);
+	$reference = mysqli_real_escape_string($conn, $reference);
+		$referenceContact = mysqli_real_escape_string($conn, $referenceContact);
 
-    $sql ="INSERT INTO tblhighered (RUID,CollegeName,FieldOfStudy,Active,Complete)
-VALUES ('$ruid','$collegeName', '$fieldOfStudy', '$active', '$completed');";
+    $sql ="INSERT INTO tblemployeehistory (RUID,Company, Position, Reference, ReferenceContact)
+VALUES ('$ruid','$companyName', '$position', '$reference', '$referenceContact');";
 
     if (mysqli_query($conn, $sql)) {
         echo "Registration successful!";
@@ -36,6 +36,7 @@ VALUES ('$ruid','$collegeName', '$fieldOfStudy', '$active', '$completed');";
 }
 $conn->close();// Close connection
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,21 +101,8 @@ $conn->close();// Close connection
     <title>Form</title>
 </head>
 <body>
-		            <form name="Personaldetails" action="ReturnToLogin.php" method="POST">
-					<label for="companyName">Company Name:</label>
-                    <input type="text" id="companyName" name="companyName">
-					
-                    <label for="position">Position:</label>
-                    <input type="text" id="position" name="position">
-					
-						<label for="reference">Reference:</label>
-                    <input type="text" id="reference" name="reference">
-					
-                    <label for="referenceContact">Reference Contact:</label>
-                    <input type="text" id="referenceContact" name="referenceContact">
+		            <form name="ReturnToLogin" action="LoginPage.php" method="POST">
 
-			
-						<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
                 <input type="submit" value="Submit">
 
         </div>
@@ -123,34 +111,3 @@ $conn->close();// Close connection
     </div>
 </body>
 </html>
-
-<?php
-/* error_reporting(0);
-
-    $companyName = $_POST["companyName"];
-    $position = $_POST["position"];
-    $reference = $_POST["reference"];
-    $referenceContact = $_POST["referenceContact"];
-  
-?>
-
-<?php
-//Inserting Vaild data
-if ($Check===True){
-
-$sql= "INSERT INTO tblemployeehistory (RUID,Company, Position, Reference, ReferenceContact)
-VALUES ('$ruid','$companyName', '$position', '$reference', '$referenceContact');";
-
-if (mysqli_query($conn,$sql)){
- echo "Succesfull";
- echo '<script>alert("Succesfull")</script>';
-}else{
- echo "Error: ".$sql."<br>".mysqli_error($conn);
-}
-mysqli_close($conn);
- }
- else{
- //Non Vaild data
- echo '<script>alert("Please Enter Correct Details")</script>';
-} */
-?>

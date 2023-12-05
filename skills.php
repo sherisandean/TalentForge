@@ -1,6 +1,72 @@
+<?php
+// Connection to database
+$servername="localhost";
+$username="root";
+$password ="";
+$db="talentforge";
+$conn = mysqli_connect($servername, $username, $password, $db);
+if (!$conn){
+die("Connection fa1led:" . mysqli_connect_error ());
+}
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve username and password from the form
+	$name = $_POST["name"];
+    $surname = $_POST["surname"];
+    $gender = $_POST["gender"];
+    $maritalStatus = $_POST["MaritalStatus"];
+    $contactNumber = $_POST["contactNumber"];
+    $email = $_POST["email"];
+	$pass = $_POST["pass"];
+    $residentialAddress = $_POST["residentialAddress"];
+    $postalAddress = $_POST["postalAddress"];
+
+    // Validate and sanitize user inputs (you should enhance this based on your requirements)
+    $name = mysqli_real_escape_string($conn, $name);
+    $surname = mysqli_real_escape_string($conn, $surname);
+    $gender = mysqli_real_escape_string($conn, $gender);
+    $maritalStatus = mysqli_real_escape_string($conn, $maritalStatus);
+    $contactNumber = mysqli_real_escape_string($conn, $contactNumber);
+    $email = mysqli_real_escape_string($conn, $email);
+    $username = mysqli_real_escape_string($conn, $username);
+    $pass = mysqli_real_escape_string($conn, $pass);
+	$residentialAddress = mysqli_real_escape_string($conn, $residentialAddress);
+    $postalAddress = mysqli_real_escape_string($conn, $postalAddress);
+
+
+    $sql = "INSERT INTO tblregusers (Name,Surname,Gender,MaritalStatus,ComtactNum,Email,Password,ResAddress,PostalAddress) VALUES
+	('$name', '$surname', '$gender', '$maritalStatus', '$contactNumber', '$email','$pass','$residentialAddress', '$postalAddress')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Registration successful!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+////RUID
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve username and password from the form
+
+// Query to search for the user
+$sql = "SELECT RUID FROM tblregusers WHERE Email = '$email' AND Password = '$pass'";
+$result = $conn->query($sql);
+
+// Check if a matching record was found
+if ($result->num_rows > 0) {
+    // Fetch the id from the result
+    $row = $result->fetch_assoc();
+    $ruid = $row['RUID'];
+  echo "Login successful! RUID: $ruid";
+} 
+}
+// Close connection
+$conn->close();// Close connection
+?>
+
 
 <?php
- //Connection to database
+/*  //Connection to database
 $servername="localhost";
 $username="root";
 $password ="";
@@ -29,7 +95,7 @@ if ($result->num_rows > 0) {
 
 // Close the connection
 $conn->close();
-
+ */
 ?>
 
 <!DOCTYPE html>
@@ -102,17 +168,12 @@ $conn->close();
             <h2>Tile 2: Skills</h2>           
                 <label for="skill1">Skill 1:</label>
                 <input type="text" id="skill1" name="skill1">
-
-                
                 <label for="skill2">Skill 2:</label>
                 <input type="text" id="skill2" name="skill2">
 				<input type="hidden" name="email" value="<?php echo $email;?>">
 				<input type="hidden" name="password" value="<?php echo $password;?>">
-
-          
-		 <input type="submit" value="Submit">
-
-
+				<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
+				<input type="submit" value="Submit">
           </form>
         </div>
     </div>
@@ -125,7 +186,7 @@ $conn->close();
 
 <?php
 error_reporting(0);
-	$skill1 = $_POST["skill1"];
+/* 	$skill1 = $_POST["skill1"];
 	$skill2 = $_POST["skill2"];
     $Check=True;
 ?>
@@ -148,5 +209,5 @@ mysqli_close($conn);
  //Non Vaild data
  echo '<script>alert("Please Enter Correct Details")</script>';
 }
-
+ */
 ?>
