@@ -3,7 +3,7 @@
 $servername="localhost";
 $username="root";
 $password ="";
-$db="talentforge";
+$db="talentforgedb";
 $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Show error message and redirect to login.php
         echo "Incorrect login details. Please try again.";
-      //  header("Location: login.php");
+        header("Location: LoginPage.php");
         exit();
     }
 }
@@ -34,7 +34,7 @@ function isValidCredentials($username, $password) {
 
     global $conn; 
 
-    $result = $conn->query("SELECT * FROM tblregusers WHERE email= '$username' AND password='$password'");
+    $result = $conn->query("SELECT * FROM tblregusers WHERE Email= '$username' AND password='$password'");
 
     return ($result->num_rows > 0);
 }
