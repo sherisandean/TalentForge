@@ -44,23 +44,26 @@
     <form method="post" asp-controller="Home" asp-action="Login">
         <h1>Company Registration Form</h1>
 
-        <label for="cuid">CUID:</label>
-        <input type="text" id="cuid" name="cuid" required>
-
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="Name" name="Name" required>
 
         <label for="surname">Surname:</label>
-        <input type="text" id="surname" name="surname" required>
+        <input type="text" id="Surname" name="Surname" required>
 
         <label for="nationality">Nationality:</label>
-        <input type="text" id="nationality" name="nationality" required>
+        <input type="text" id="Nationality" name="Nationality" required>
 
         <label for="idnumber ">ID Number:</label>
-        <input type="text" id="idnumber" name="idnumber" required>
+        <input type="text" id="ID Number" name="ID Number" required>
 
         <label for="company">Company:</label>
-        <input type="text" id="company" name="company" required>
+        <input type="text" id="Company" name="Company" required>
+		
+		 <label for="company">Email:</label>
+        <input type="text" id="Email" name="Email" required>
+		
+		 <label for="company">Password:</label>
+        <input type="text" id="Password" name="Password" required>
 
         <button type="submit">Submit</button>
     </form>

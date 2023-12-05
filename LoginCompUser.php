@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session
  //Connection to database
 $servername="localhost";
 $username="root";
@@ -17,6 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Perform validation and authentication (replace this with your actual authentication logic)
     if (isValidCredentials($username, $password)) {
+       // Retrieve CUID from the database
+        $cuidResult = $conn->query("SELECT CUID FROM tblcompusers WHERE Email = '$username'");
+        $cuidRow = $cuidResult->fetch_assoc();
+        $cuid = $cuidRow['CUID'];
+
+        // Store CUID in session variable
+        $_SESSION['cuid'] = $cuid;
+
         // Redirect to User.php
 		        echo "correct login details..";
         header("Location: CUHome.php");
