@@ -41,7 +41,7 @@
 <body>
 
 
-    <form method="post" asp-controller="Home" asp-action="Login">
+    <form method="post" asp-controller="Home" asp-action="Login" action="ReturnToLoginComp.php">
         <h1>Company Registration Form</h1>
 
         <label for="name">Name:</label>
@@ -54,7 +54,7 @@
         <input type="text" id="Nationality" name="Nationality" required>
 
         <label for="idnumber ">ID Number:</label>
-        <input type="text" id="ID Number" name="ID Number" required>
+        <input type="text" id="IDNumber" name="IDNumber" required>
 
         <label for="company">Company:</label>
         <input type="text" id="Company" name="Company" required>
