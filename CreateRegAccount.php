@@ -83,14 +83,14 @@ error_reporting(0);
             <h2>Tile 1: User Information</h2>
             <form name="Personaldetails" action="skills.php" method="POST">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
+                <input type="text" id="Name" name="Name">
 
-                <label for="surname">Surname:</label>
-                <input type="text" id="surname" name="surname">
+                <label for="Surname">Surname:</label>
+                <input type="text" id="Surname" name="Surname">
 
                 
-				<label for="gender"> Gender : </label> 
-				 <Input  type = 'Radio' Name ='gender' value='male' >Male<Input type = 'Radio' Name ='gender' value= 'female'>Female
+				<label for="Gender"> Gender : </label> 
+				 <Input  type = 'Radio' Name ='Gender' value='male' >Male<Input type = 'Radio' Name ='Gender' value= 'female'>Female
 
          
 				
@@ -98,23 +98,20 @@ error_reporting(0);
 				 <Input type = 'Radio' Name ='MaritalStatus' value='Single'>Single<Input type = 'Radio' Name ='MaritalStatus' value= 'female'>Married
 
                 
-                <label for="contactNumber">Contact Number:</label>
-                <input type="text" id="contactNumber" name="contactNumber">
+                <label for="ContactNum">Contact Number:</label>
+                <input type="text" id="ContactNum" name="ContactNum">
 
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email">
+                <label for="Email">Email:</label>
+                <input type="text" id="Email" name="Email">
 				
-				<label for="password">Password :</label>
-                <input type="text" id="pass" name="pass">
+				<label for="Password">Password :</label>
+                <input type="text" id="Password" name="Password">
 
-                <label for="residentialAddress">Residential Address:</label>
-                <input type="text" id="residentialAddress" name="residentialAddress">
+                <label for="ResAddress">Residential Address:</label>
+                <input type="text" id="ResAddress" name="ResAddress">
 
-                <label for="postalAddress">Postal Address:</label>
-                <input type="text" id="postalAddress" name="postalAddress">
-
-                <label for="IDNumber">ID Number:</label>
-                <input type="text" id="IDNumber" name="IDNumber">
+                <label for="PostalAddress">Postal Address:</label>
+                <input type="text" id="PostalAddress" name="PostalAddress">
 				
 				                <input type="submit" value="Submit">
             </form>

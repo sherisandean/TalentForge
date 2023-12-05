@@ -3,7 +3,7 @@
 $servername="localhost";
 $username="root";
 $password ="";
-$db="talentforge";
+$db="talentforgedb";
 $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
@@ -12,16 +12,17 @@ die("Connection fa1led:" . mysqli_connect_error ());
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve username and password from the form
-	$email = $_POST["email"];
-	$pass = $_POST["password"];
+	$email = $_POST["Email"];
+	$pass = $_POST["Password"];
+	$ruid = $_POST["RUID"];
 	$skill1 = $_POST["skill1"];
     $skill2 = $_POST["skill2"];
-	$ruid = $_POST["ruid"];
+	
     // Validate and sanitize user inputs (you should enhance this based on your requirements)
     $skill1 = mysqli_real_escape_string($conn, $skill1);
     $skill2 = mysqli_real_escape_string($conn, $skill2);
 
-    $sql = "INSERT INTO tblskills (RUID,Skill1,Skill2) VALUES
+    $sql = "INSERT INTO tblskills (RUID,skill1,skill2) VALUES
 	('$ruid','$skill1','$skill2')";
 
     if (mysqli_query($conn, $sql)) {
@@ -181,51 +182,51 @@ mysqli_close($conn); */
 
 				
         <label for="subject1">Subject 1:</label>
-        <input type="text" id="subject1" name="subject1" required>
+        <input type="text" id="Subject1" name="Subject1" required>
 
         <label for="mark1">Mark 1:</label>
-        <input type="text" id="mark1" name="mark1" required>
+        <input type="text" id="Mark1" name="Mark1" required>
 
         <label for="subject2">Subject 2:</label>
-        <input type="text" id="subject2" name="subject2" required>
+        <input type="text" id="Subject2" name="Subject2" required>
 
         <label for="mark2">Mark 2:</label>
-        <input type="text" id="mark2" name="mark2" required>
+        <input type="text" id="Mark2" name="Mark2" required>
 
         <label for="subject3">Subject 3:</label>
-        <input type="text" id="subject3" name="subject3" required>
+        <input type="text" id="Subject3" name="Subject3" required>
 
         <label for="mark3">Mark 3:</label>
-        <input type="text" id="mark3" name="mark3" required>
+        <input type="text" id="Mark3" name="Mark3" required>
 
         <label for="subject1">Subject 4:</label>
-        <input type="text" id="subject4" name="subject4" required>
+        <input type="text" id="Subject4" name="Subject4" required>
 
         <label for="mark4">Mark 4:</label>
-        <input type="text" id="mark4" name="mark4" required>
+        <input type="text" id="Mark4" name="Mark4" required>
 
         <label for="subject2">Subject 5:</label>
-        <input type="text" id="subject5" name="subject5" required>
+        <input type="text" id="Subject5" name="Subject5" required>
 
         <label for="mark2">Mark 5:</label>
-        <input type="text" id="mark5" name="mark5" required>
+        <input type="text" id="Mark5" name="Mark5" required>
 
         <!-- Subject 3 -->
         <label for="subject3">Subject 6:</label>
-        <input type="text" id="subject6" name="subject6" required>
+        <input type="text" id="Subject6" name="Subject6" required>
 
         <label for="mark3">Mark 6:</label>
-        <input type="text" id="mark6" name="mark6" required>
+        <input type="text" id="Mark6" name="Mark6" required>
 
 <!-- Subject 1 -->
         <label for="subject1">Subject 7:</label>
-        <input type="text" id="subject7" name="subject7" required>
+        <input type="text" id="Subject7" name="Subject7" required>
 
         <label for="mark1">Mark 7:</label>
-        <input type="text" id="mark7" name="mark7" required>
-				<input type="hidden" name="email" value="<?php echo $email;?>">
-				<input type="hidden" name="password" value="<?php echo $password;?>">
-		<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
+        <input type="text" id="Mark7" name="Mark7" required>
+				<input type="hidden" name="Email" value="<?php echo $email;?>">
+				<input type="hidden" name="Password" value="<?php echo $password;?>">
+		<input type="hidden" name="RUID" value="<?php echo $ruid;?>">
         </div>
 		
  <input type="submit" value="Submit">

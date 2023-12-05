@@ -3,7 +3,7 @@
 $servername="localhost";
 $username="root";
 $password ="";
-$db="talentforge";
+$db="talentforgedb";
 $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
@@ -12,16 +12,15 @@ die("Connection fa1led:" . mysqli_connect_error ());
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve username and password from the form
-	$name = $_POST["name"];
-    $surname = $_POST["surname"];
-    $gender = $_POST["gender"];
+	$name = $_POST["Name"];
+    $surname = $_POST["Surname"];
+    $gender = $_POST["Gender"];
     $maritalStatus = $_POST["MaritalStatus"];
-    $contactNumber = $_POST["contactNumber"];
-    $email = $_POST["email"];
-	$pass = $_POST["pass"];
-    $residentialAddress = $_POST["residentialAddress"];
-    $postalAddress = $_POST["postalAddress"];
-	$IDNumber = $_POST["IDNumber"];
+    $contactNumber = $_POST["ContactNum"];
+    $email = $_POST["Email"];
+	$pass = $_POST["Password"];
+    $residentialAddress = $_POST["ResAddress"];
+    $postalAddress = $_POST["PostalAddress"];
 
     // Validate and sanitize user inputs (you should enhance this based on your requirements)
     $name = mysqli_real_escape_string($conn, $name);
@@ -34,11 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass = mysqli_real_escape_string($conn, $pass);
 	$residentialAddress = mysqli_real_escape_string($conn, $residentialAddress);
     $postalAddress = mysqli_real_escape_string($conn, $postalAddress);
-	$IDNumber = mysqli_real_escape_string($conn, $IDNumber);
 
 
-    $sql = "INSERT INTO tblregusers (Name,Surname,Gender,MaritalStatus,ContactNum,Email,Password,ResAddress,PostalAddress,IDNumber) VALUES
-	('$name', '$surname', '$gender', '$maritalStatus', '$contactNumber', '$email','$pass','$residentialAddress', '$postalAddress','$IDNumber')";
+    $sql = "INSERT INTO tblregusers (Name,Surname,Gender,MaritalStatus,ContactNum,Email,Password,ResAddress,PostalAddress) VALUES
+	('$name', '$surname', '$gender', '$maritalStatus', '$contactNumber', '$email','$pass','$residentialAddress', '$postalAddress')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Registration successful!";
@@ -172,9 +170,9 @@ $conn->close();
                 <input type="text" id="skill1" name="skill1">
                 <label for="skill2">Skill 2:</label>
                 <input type="text" id="skill2" name="skill2">
-				<input type="hidden" name="email" value="<?php echo $email;?>">
-				<input type="hidden" name="password" value="<?php echo $password;?>">
-				<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
+				<input type="hidden" name="Email" value="<?php echo $email;?>">
+				<input type="hidden" name="Password" value="<?php echo $password;?>">
+				<input type="hidden" name="RUID" value="<?php echo $ruid;?>">
 				<input type="submit" value="Submit">
           </form>
         </div>

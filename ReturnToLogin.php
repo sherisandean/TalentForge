@@ -3,7 +3,7 @@
 $servername="localhost";
 $username="root";
 $password ="";
-$db="talentforge";
+$db="talentforgedb";
 $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
@@ -13,12 +13,12 @@ die("Connection fa1led:" . mysqli_connect_error ());
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-	$ruid = $_POST["ruid"];
+	$ruid = $_POST["RUID"];
     // Retrieve username and password from the form
-    $companyName = $_POST["companyName"];
-    $position = $_POST["position"];
-    $reference = $_POST["reference"];
-    $referenceContact = $_POST["referenceContact"];
+    $companyName = $_POST["Company"];
+    $position = $_POST["Position"];
+    $reference = $_POST["Reference"];
+    $referenceContact = $_POST["ReferenceContact"];
     // Validate and sanitize user inputs (you should enhance this based on your requirements)
     $companyName = mysqli_real_escape_string($conn, $companyName);
     $position = mysqli_real_escape_string($conn, $position);

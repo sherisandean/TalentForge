@@ -3,7 +3,7 @@
 $servername="localhost";
 $username="root";
 $password ="";
-$db="talentforge";
+$db="talentforgedb";
 $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
@@ -12,26 +12,26 @@ die("Connection fa1led:" . mysqli_connect_error ());
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve username and password from the form
-	$email = $_POST["email"];
-	$pass = $_POST["password"];
-	$ruid = $_POST["ruid"];
+	$email = $_POST["Email"];
+	$pass = $_POST["Password"];
+	$ruid = $_POST["RUID"];
 	$lastSchool = $_POST["lastSchool"];
 	$highestGrade = $_POST["highestGrade"];	
 	$finalYear = $_POST["finalYear"];
-	$sub1 = $_POST["subject1"];
-	$mrk1 = $_POST["mark1"];
-	$sub2 = $_POST["subject2"];
-	$mrk2 = $_POST["mark2"];
-	$sub3 = $_POST["subject3"];
-	$mrk3 = $_POST["mark3"];
-	$sub4 = $_POST["subject4"];
-	$mrk4 = $_POST["mark4"];
-	$sub5 = $_POST["subject5"];
-	$mrk5 = $_POST["mark5"];
-	$sub6 = $_POST["subject6"];
-	$mrk6 = $_POST["mark6"];
-	$sub7 = $_POST["subject7"];
-	$mrk7 = $_POST["mark7"];
+	$sub1 = $_POST["Subject1"];
+	$mrk1 = $_POST["Mark1"];
+	$sub2 = $_POST["Subject2"];
+	$mrk2 = $_POST["Mark2"];
+	$sub3 = $_POST["Subject3"];
+	$mrk3 = $_POST["Mark3"];
+	$sub4 = $_POST["Subject4"];
+	$mrk4 = $_POST["Mark4"];
+	$sub5 = $_POST["Subject5"];
+	$mrk5 = $_POST["Mark5"];
+	$sub6 = $_POST["Subject6"];
+	$mrk6 = $_POST["Mark6"];
+	$sub7 = $_POST["Subject7"];
+	$mrk7 = $_POST["Mark7"];
     // Validate and sanitize user inputs (you should enhance this based on your requirements)
     $lastSchool = mysqli_real_escape_string($conn, $lastSchool);
     $highestGrade = mysqli_real_escape_string($conn, $highestGrade);
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$sub7 = mysqli_real_escape_string($conn, $sub7);
 		$mrk7 = mysqli_real_escape_string($conn, $mrk7);
 
-    $sql = "INSERT INTO tblschoolinfo (RUID,LastSchoolAttended,HighestGradePassed,FinalYear, 
+    $sql = "INSERT INTO tblschoolinfo (RUID,LastSchool,highestGrade,finalYear, 
 	Subject1, Mark1, Subject2, Mark2, Subject3, Mark3, Subject4, Mark4, Subject5, Mark5, 
 	Subject6, Mark6, Subject7, Mark7)
         VALUES ('$ruid','$lastSchool', '$highestGrade', '$finalYear', '$sub1', '$mrk1', '$sub2', '$mrk2',
@@ -147,9 +147,9 @@ $conn->close();// Close connection
 					<label for="Completed">Completed: </label> 
 				 <Input type = 'Radio' Name ='Completed' value='Yes'>Yes<Input type = 'Radio' Name ='Completed' value= 'NO'>NO
 				 
-						<input type="hidden" name="email" value="<?php echo $email;?>">
-						<input type="hidden" name="password" value="<?php echo $password;?>">
-						<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
+						<input type="hidden" name="Email" value="<?php echo $email;?>">
+						<input type="hidden" name="Password" value="<?php echo $password;?>">
+						<input type="hidden" name="RUID" value="<?php echo $ruid;?>">
 
 				
 				 <input type="submit" value="Submit">

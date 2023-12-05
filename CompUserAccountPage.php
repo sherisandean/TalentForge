@@ -30,13 +30,13 @@ if (isset($_SESSION['cuid'])) {
         // Update the user data in the database based on CUID
 
         // Fetch updated values from POST data
-        $updatedName = $_POST['updatedName'];
-        $updatedSurname = $_POST['updatedSurname'];
-        $updatedNationality = $_POST['updatedNationality'];
-        $updatedIDNumber = $_POST['updatedIDNumber'];
-        $updatedCompany = $_POST['updatedCompany'];
-        $updatedEmail = $_POST['updatedEmail'];
-        $updatedPassword = $_POST['updatedPassword'];
+        $updatedName = $_POST['Name'];
+        $updatedSurname = $_POST['Surname'];
+        $updatedNationality = $_POST['Nationality'];
+        $updatedIDNumber = $_POST['IDNumber'];
+        $updatedCompany = $_POST['Company'];
+        $updatedEmail = $_POST['Email'];
+        $updatedPassword = $_POST['Password'];
 
         // Update the database with the new values
         $updateQuery = "UPDATE tblcompusers SET 
@@ -52,9 +52,13 @@ if (isset($_SESSION['cuid'])) {
         if ($conn->query($updateQuery) === TRUE) {
             // Successful update
             echo "Record updated successfully.";
+			header("Location: CUHome.php");
+        exit();
         } else {
             // Handle error
             echo "Error updating record: " . $conn->error;
+			header("Location: PostJobs.php");
+        exit();
         }
         // Close the database connection
         mysqli_close($conn);
@@ -176,7 +180,7 @@ if (isset($_SESSION['cuid'])) {
     </nav>
 </header>
 <body>
-    <form method="post" asp-controller="Account" asp-action="Edit">
+    <form method="post" asp-controller="Account" asp-action="Edit" action="CompUserAccountPage.php">
         <h1>My Account</h1>
         <label for="name">Name:</label>
         <input type="text" id="Name" name="Name" value="<?php echo $userData['Name']; ?>" required readonly>

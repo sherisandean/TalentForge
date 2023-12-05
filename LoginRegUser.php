@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session
  //Connection to database
 $servername="localhost";
 $username="root";
@@ -17,6 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Perform validation and authentication (replace this with your actual authentication logic)
     if (isValidCredentials($username, $password)) {
+       // Retrieve RUID from the database
+        $ruidResult = $conn->query("SELECT RUID FROM tblregusers WHERE Email = '$username'");
+        $ruidRow = $ruidResult->fetch_assoc();
+        $ruid = $ruidRow['RUID'];
+
+        // Store RUID in session variable
+        $_SESSION['ruid'] = $ruid;
+
         // Redirect to User.php
 		        echo "correct login details..";
         header("Location: RUHome.php");
@@ -40,7 +49,6 @@ function isValidCredentials($username, $password) {
 }
 
 ?>
-
 
 
 <html lang="en"><head>

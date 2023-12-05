@@ -3,7 +3,7 @@
 $servername="localhost";
 $username="root";
 $password ="";
-$db="talentforge";
+$db="talentforgedb";
 $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());
@@ -11,9 +11,9 @@ die("Connection fa1led:" . mysqli_connect_error ());
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$email = $_POST["email"];
-	$pass = $_POST["password"];
-	$ruid = $_POST["ruid"];
+		$email = $_POST["Email"];
+	$pass = $_POST["Password"];
+	$ruid = $_POST["RUID"];
     // Retrieve username and password from the form
     $collegeName = $_POST["collegeName"];
     $fieldOfStudy = $_POST["fieldOfStudy"];
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$active = mysqli_real_escape_string($conn, $active);
 		$completed = mysqli_real_escape_string($conn, $completed);
 
-    $sql ="INSERT INTO tblhighered (RUID,CollegeName,FieldOfStudy,Active,Complete)
+    $sql ="INSERT INTO tblhighered (RUID,collegeName,fieldOfStudy,Active,Completed)
 VALUES ('$ruid','$collegeName', '$fieldOfStudy', '$active', '$completed');";
 
     if (mysqli_query($conn, $sql)) {
@@ -102,19 +102,19 @@ $conn->close();// Close connection
 <body>
 		            <form name="Personaldetails" action="ReturnToLogin.php" method="POST">
 					<label for="companyName">Company Name:</label>
-                    <input type="text" id="companyName" name="companyName">
+                    <input type="text" id="Company" name="Company">
 					
                     <label for="position">Position:</label>
-                    <input type="text" id="position" name="position">
+                    <input type="text" id="Position" name="Position">
 					
 						<label for="reference">Reference:</label>
-                    <input type="text" id="reference" name="reference">
+                    <input type="text" id="Reference" name="Reference">
 					
                     <label for="referenceContact">Reference Contact:</label>
-                    <input type="text" id="referenceContact" name="referenceContact">
+                    <input type="text" id="ReferenceContact" name="ReferenceContact">
 
 			
-						<input type="hidden" name="ruid" value="<?php echo $ruid;?>">
+						<input type="hidden" name="RUID" value="<?php echo $ruid;?>">
                 <input type="submit" value="Submit">
 
         </div>
