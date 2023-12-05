@@ -105,8 +105,8 @@ function isValidCredentials($username, $password) {
     <div class="container">
   
 <div class="container">
-    <h1 class="display-4 text-center">TalentForge User Login</h1>
-
+    <h1 class="display-4 text-center"> User Login</h1>
+     <img src="TalentForge.png" alt="Your Image">
     <form method="post" >
         <div class="row justify-content-center">
             <div class="col-md-3">

@@ -108,7 +108,7 @@
     </header>
 <body>
     <h1>TalentForge</h1>
-    <img id="logo" src="@Url.Content("~/IMG-20230819-WA0002-removebg-preview.png")" alt="TalentForge Logo">
+    <img src="TalentForge.png" alt="Your Image">
 
     <div id="description">
         <div class="tile">

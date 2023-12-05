@@ -120,7 +120,7 @@
 
     <div>
         <!-- Centered Image -->
-        <img src="/IMG-20230819-WA0002-removebg-preview.png" alt="TalentForge Image" class="centered-image" width="250">
+        <img src="TalentForge.png" alt="TalentForge Image" class="centered-image" width="250">
 
         <div class="account-heading">Choose a login type:</div>
 
