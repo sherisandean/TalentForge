@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name - Curriculum Vitae</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    .cv {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 36px;
+      color: #333;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+      font-size: 24px;
+      color: #333;
+    }
+    .field {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .personal-statement {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cv" id="CVtemp1">
+  <div class="header">
+    <h1>CV FOR Your Name</h1>
+    
+  </div>
+
+    <div class="section">
+      <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      <div class="field">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+      <div class="field">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+      <div class="field">
+        <label for="nationality">Nationality:</label>
+        <input type="text" id="nationality" name="nationality" required>
+      </div>
+      <div class="field">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="maritalStatus">Marital Status:</label>
+        <select id="maritalStatus" name="maritalStatus" required>
+          <option value="single">Single</option>
+          <option value="married">Married</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" id="contactNumber" name="contactNumber" required>
+      </div>
+      <div class="field">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="residentialAddress">Residential Address:</label>
+        <textarea id="residentialAddress" name="residentialAddress" rows="2" required></textarea>
+      </div>
+      <div class="field">
+        <label for="postalAddress">Postal Address:</label>
+        <textarea id="postalAddress" name="postalAddress" rows="2" required></textarea>
+      </div>
+    </div>
+
+
+  <div class="section">
+    <h2>Education</h2>
+    <div class="field">
+      <label for="school">Latest School Attended:</label>
+      <input type="text" id="school" name="school" required>
+    </div>
+    <div class="field">
+      <label for="grade">Highest Grade Passed:</label>
+      <input type="text" id="grade" name="grade" required>
+    </div>
+    <div class="field">
+      <label for="finalYear">Final Year of Schooling:</label>
+      <input type="text" id="finalYear" name="finalYear" required>
+    </div>
+
+    <!-- Fields for each subject and its marks -->
+    <div class="field">
+      <label for="subject1">Subject 1:</label>
+      <input type="text" id="subject1" name="subject1" placeholder="Enter subject name">
+      <input type="text" id="marks1" name="marks1" placeholder="Enter marks">
+    </div>
+
+    <div class="field">
+      <label for="subject2">Subject 2:</label>
+      <input type="text" id="subject2" name="subject2" placeholder="Enter subject name">
+      <input type="text" id="marks2" name="marks2" placeholder="Enter marks">
+    </div>
+
+    <div class="field">
+      <label for="subject3">Subject 3:</label>
+      <input type="text" id="subject3" name="subject3" placeholder="Enter subject name">
+      <input type="text" id="marks3" name="marks3" placeholder="Enter marks">
+    </div>
+	
+	<div class="field">
+      <label for="subject4">Subject 4:</label>
+      <input type="text" id="subject4" name="subject4" placeholder="Enter subject name">
+      <input type="text" id="marks4" name="marks4" placeholder="Enter marks">
+    </div>
+	
+	<div class="field">
+      <label for="subject5">Subject 5:</label>
+      <input type="text" id="subject5" name="subject5" placeholder="Enter subject name">
+      <input type="text" id="marks5" name="marks5" placeholder="Enter marks">
+    </div>
+	
+	<div class="field">
+      <label for="subject6">Subject 6:</label>
+      <input type="text" id="subject6" name="subject6" placeholder="Enter subject name">
+      <input type="text" id="marks6" name="marks6" placeholder="Enter marks">
+    </div>
+	
+	<div class="field">
+      <label for="subject7">Subject 7:</label>
+      <input type="text" id="subject7" name="subject7" placeholder="Enter subject name">
+      <input type="text" id="marks7" name="marks7" placeholder="Enter marks">
+    </div>
+
+  </div>
+  
+  <div class="section">
+    <h2>Higher Education</h2>
+    <div class="field">
+      <label for="college">College or University Name:</label>
+      <input type="text" id="college" name="college" required>
+    </div>
+    <div class="field">
+      <label for="location">College or University Location:</label>
+      <input type="text" id="location" name="location" required>
+    </div>
+    <div class="field">
+      <label for="fieldOfStudy">Field of Study:</label>
+      <input type="text" id="fieldOfStudy" name="fieldOfStudy" placeholder="What is your elective or major" required>
+    </div>
+
+    <div class="field">
+      <label for="completionStatus">Tertiary Study Completion Status:</label>
+      <select id="completionStatus" name="completionStatus">
+        <option value="ongoing">Ongoing</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+  </div>
+  
+  
+  
+
+  <div class="section">
+    <h2>Experience</h2>
+   
+    <div class="field">
+      <label for="jobTitle1">Job Title 1:</label>
+      <input type="text" id="jobTitle1" name="jobTitle1" placeholder="Enter job title">
+      <input type="text" id="company1" name="company1" placeholder="Enter company name">
+      <input type="text" id="year1" name="year1" placeholder="Enter year">
+    </div>
+
+    <div class="field">
+      <label for="jobTitle2">Job Title 2:</label>
+      <input type="text" id="jobTitle2" name="jobTitle2" placeholder="Enter job title">
+      <input type="text" id="company2" name="company2" placeholder="Enter company name">
+      <input type="text" id="year2" name="year2" placeholder="Enter year">
+    </div>
+
+    
+
+  </div>
+
+  <div class="section">
+    <h2>Skills</h2>
+  
+    <div class="field">
+      <label for="skill1">Skill 1:</label>
+      <input type="text" id="skill1" name="skill1" placeholder="Enter skill">
+    </div>
+
+    <div class="field">
+      <label for="skill2">Skill 2:</label>
+      <input type="text" id="skill2" name="skill2" placeholder="Enter skill">
+    </div>
+
+  
+
+  </div>
+  
+  
+  
+  
+
+  <div class="section personal-statement">
+    <h2>Personal Statement</h2>
+    <textarea id="personalStatement" name="personalStatement" rows="4" placeholder="Write a brief personal statement"></textarea>
+  </div>
+
+
+</div>
+</body>
+</html>
