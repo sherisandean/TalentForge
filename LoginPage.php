@@ -1,3 +1,67 @@
+<?php
+session_start(); // Start a session to store user information
+
+// Include the database connection code here (modify as needed)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "talentforgedb";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["Username"];
+    $password = $_POST["Password"];
+
+    // Check if the email exists in tblRegUsers
+    $query = "SELECT * FROM tblRegUsers WHERE Email = '$username'";
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $hashedPassword = $row["Password"];
+
+        // Check if the password is correct
+        if (password_verify($password, $hashedPassword)) {
+            // Redirect to RUHome.php
+            $_SESSION["user_type"] = "registered";
+            header("Location: TalentForge/RUHome.php");
+            exit();
+        } else {
+            $error_message = "Password Incorrect";
+        }
+    } else {
+        // Check if the email exists in tblCompUsers
+        $query = "SELECT * FROM tblCompUsers WHERE Email = '$username'";
+        $result = $conn->query($query);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $hashedPassword = $row["Password"];
+
+            // Check if the password is correct
+            if (password_verify($password, $hashedPassword)) {
+                // Redirect to CUHome.php
+                $_SESSION["user_type"] = "company";
+                header("Location: TalentForge/CUHome.php");
+                exit();
+            } else {
+                $error_message = "Password Incorrect";
+            }
+        } else {
+            $error_message = "Account does not exist. Please create an account.";
+        }
+    }
+}
+
+$conn->close();
+?>
+
+
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
