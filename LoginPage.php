@@ -1,65 +1,46 @@
 <?php
-session_start(); // Start a session to store user information
-
-// Include the database connection code here (modify as needed)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "talentforgedb";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+ //Connection to database
+$servername="localhost";
+$username="root";
+$password ="";
+$db="talentforge";
+$conn = mysqli_connect($servername, $username, $password, $db);
+if (!$conn){
+die("Connection fa1led:" . mysqli_connect_error ());
 }
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve username and password from the form
     $username = $_POST["Username"];
     $password = $_POST["Password"];
 
-    // Check if the email exists in tblRegUsers
-    $query = "SELECT * FROM tblRegUsers WHERE Email = '$username'";
-    $result = $conn->query($query);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $hashedPassword = $row["Password"];
-
-        // Check if the password is correct
-        if (password_verify($password, $hashedPassword)) {
-            // Redirect to RUHome.php
-            $_SESSION["user_type"] = "registered";
-            header("Location: TalentForge/RUHome.php");
-            exit();
-        } else {
-            $error_message = "Password Incorrect";
-        }
+    // Perform validation and authentication (replace this with your actual authentication logic)
+    if (isValidCredentials($username, $password)) {
+        // Redirect to User.php
+		        echo "correct login details..";
+       // header("Location: User.php");
+        exit();
     } else {
-        // Check if the email exists in tblCompUsers
-        $query = "SELECT * FROM tblCompUsers WHERE Email = '$username'";
-        $result = $conn->query($query);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $hashedPassword = $row["Password"];
-
-            // Check if the password is correct
-            if (password_verify($password, $hashedPassword)) {
-                // Redirect to CUHome.php
-                $_SESSION["user_type"] = "company";
-                header("Location: TalentForge/CUHome.php");
-                exit();
-            } else {
-                $error_message = "Password Incorrect";
-            }
-        } else {
-            $error_message = "Account does not exist. Please create an account.";
-        }
+        // Show error message and redirect to login.php
+        echo "Incorrect login details. Please try again.";
+      //  header("Location: login.php");
+        exit();
     }
 }
 
-$conn->close();
+// Function to validate credentials (replace this with your actual authentication logic)
+function isValidCredentials($username, $password) {
+
+    global $conn; 
+
+    $result = $conn->query("SELECT * FROM tblregusers WHERE email= '$username' AND password='$password'");
+
+    return ($result->num_rows > 0);
+}
+
 ?>
+
 
 
 <html lang="en"><head>
@@ -126,7 +107,7 @@ $conn->close();
 <div class="container">
     <h1 class="display-4 text-center">TalentForge Login</h1>
 
-    <form method="post" action="/Home/Login">
+    <form method="post" >
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <!-- First Column -->
