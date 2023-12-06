@@ -21,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$pass = $_POST["Password"];
     $residentialAddress = $_POST["ResAddress"];
     $postalAddress = $_POST["PostalAddress"];
+	$IDNumber = $_POST["IDNumber"];
+
 
     // Validate and sanitize user inputs (you should enhance this based on your requirements)
     $name = mysqli_real_escape_string($conn, $name);
@@ -33,10 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass = mysqli_real_escape_string($conn, $pass);
 	$residentialAddress = mysqli_real_escape_string($conn, $residentialAddress);
     $postalAddress = mysqli_real_escape_string($conn, $postalAddress);
+    $IDNumber = mysqli_real_escape_string($conn, $IDNumber);
 
-
-    $sql = "INSERT INTO tblregusers (Name,Surname,Gender,MaritalStatus,ContactNum,Email,Password,ResAddress,PostalAddress) VALUES
-	('$name', '$surname', '$gender', '$maritalStatus', '$contactNumber', '$email','$pass','$residentialAddress', '$postalAddress')";
+     $sql = "INSERT INTO tblregusers (Name,Surname,Gender,MaritalStatus,ContactNum,Email,Password,ResAddress,PostalAddress,IDNumber) VALUES
+	('$name', '$surname', '$gender', '$maritalStatus', '$contactNumber', '$email','$pass','$residentialAddress', '$postalAddress','$IDNumber')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Registration successful!";

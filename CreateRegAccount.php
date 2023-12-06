@@ -112,6 +112,9 @@ error_reporting(0);
 
                 <label for="PostalAddress">Postal Address:</label>
                 <input type="text" id="PostalAddress" name="PostalAddress">
+								
+                <label for="IDNumber">ID Number:</label>
+                <input type="text" id="IDNumber" name="IDNumber">
 				
 				                <input type="submit" value="Submit">
             </form>
