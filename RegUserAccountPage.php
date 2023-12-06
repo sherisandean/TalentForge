@@ -140,15 +140,18 @@ if (isset($_SESSION['ruid'])) {
 
             // Execute the update queries
             $conn->query($updateUserQuery);
+			
             $conn->query($updateSkillsQuery);
+			
             $conn->query($updateSchoolInfoQuery);
+			
 			$conn->query($updateHigherEdQuery);
+			
 			$conn->query($updateEmpHistoryQuery);
+			//$conn->commit();
           
 
-            // Commit the transaction
-            $conn->commit();
-
+            
             // Successful update
             echo "Record updated successfully.";
             header("Location: RUHome.php");
