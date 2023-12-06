@@ -1,0 +1,173 @@
+<?php
+if (isset($_SESSION['ruid'])) {
+    $ruid = $_SESSION['ruid'];
+
+    // Connection to the database
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $db = "talentforgedb";
+    $conn = mysqli_connect($servername, $username, $password, $db);
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+// Assuming you have already connected to the database ($conn)
+
+// Personal Info
+$pi = "SELECT * FROM tblregusers WHERE RUID = '$ruid'"; // Modify the WHERE clause based on your requirement
+
+$result = $conn->query($pi);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    
+    $firstName = $row["Name"];
+    $lastName = $row["Surname"];
+    $idnum = $row["ID Number"];
+	$gender = $row["Gender"];
+    $ms = $row["Marital Status"];
+	$contnum = $row["ContactNum"];
+	$resadd = $row["ResAddress"];
+	$posadd = $row["Postal Address"];
+	
+	$resadd 
+	$posadd
+	// School Info
+$si = "SELECT * FROM tblschoolinfo WHERE RUID = '$ruid'"; // Modify the WHERE clause based on your requirement
+
+$result = $conn->query($si);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    
+	$LSA = $row["Last School Attended"];
+	$HGP= $row["Highest GradePassed"];
+	$FY = $row["FinalYear"];
+    $sub1 = $row["Subject1"];
+    $mk1 = $row["Mark1"];
+	$sub2= $row["Subject2"];
+	$mk2 = $row["Mark2"];
+	$sub3 = $row["Subject3"];
+	$mk3 = $row["Mark3"];
+	$sub4 = $row["Subject4"];
+	$mk4 = $row["Mark4"];
+	$sub5 = $row["Subject5"];
+	$mk5 = $row["Mark5"];
+	$sub6 = $row["Subject6"];
+	$mk6 = $row["Mark6"];
+	$sub7 = $row["Subject7"];
+	$mk7 = $row["Mark7"];
+	
+		// 	Higher Ed
+$hei = "SELECT * FROM tbltblhighered WHERE RUID = '$ruid'"; // Modify the WHERE clause based on your requirement
+
+$result = $conn->query($hei);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    
+	$colname = $row["collegeName"];
+	$FOS = $row["fieldOfStudy"];
+	$Active = $row["Active"];
+	$compl = $row["completed"];
+	
+	
+			// employee history
+$emphi = "SELECT * FROM tbltblhighered WHERE RUID = '$ruid'"; // Modify the WHERE clause based on your requirement
+
+$result = $conn->query($hei);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    
+	$company = $row["Company"];
+	$position = $row["Position"];
+	$ref = $row["Reference"];
+	$refcon = $row["ReferenceContact"];
+	
+	
+				// skills
+$skills = "SELECT * FROM tblskills WHERE RUID = '$ruid'"; // Modify the WHERE clause based on your requirement
+
+$result = $conn->query($hei);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    
+	$sk1 = $row["Skill1"];
+	$sk2 = $row["skill2"];
+	
+	
+	
+   
+	
+	
+	
+    
+} else {
+    // Handle the case where no data is found
+    echo "No data found";
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+
+
+<!--Personal Info -->
+<input type="text" id="firstName" name="firstName" value="<?php echo $firstName; ?>" required>
+<input type="text" id="lastName" name="lastName" value="<?php echo $lastName; ?>" required>
+<input type="text" id="idnum" name="idnum" value="<?php echo $idnum; ?>" required>
+<input type="text" id="gender" name="gender" value="<?php echo $gender; ?>" required>
+<input type="text" id="ms" name="marsta" value="<?php echo $ms; ?>" required>
+<input type="text" id="contnum" name="contactnum" value="<?php echo $contnum; ?>" required>
+<input type="text" id="redad" name="resadd" value="<?php echo $resadd ; ?>" required>
+<input type="text" id="posad" name="posadd" value="<?php echo $posadd; ?>" required>
+
+
+<!--School Info -->
+<input type="text" id="sub1" name="subject1" value="<?php echo $sub1; ?>" required>
+<input type="text" id="mk1" name="mark1" value="<?php echo $mk1; ?>" required>
+<input type="text" id="sub2" name="subject2" value="<?php echo $sub2; ?>" required>
+<input type="text" id="mk2" name="mark2" value="<?php echo $mk2; ?>" required>
+<input type="text" id="sub3" name="subject3" value="<?php echo $sub3; ?>" required>
+<input type="text" id="mk3" name="mark3" value="<?php echo $mk3; ?>" required>
+<input type="text" id="sub4" name="subject4" value="<?php echo $sub4; ?>" required>
+<input type="text" id="mk4" name="mark4" value="<?php echo $mk4; ?>" required>
+<input type="text" id="sub5" name="subject5" value="<?php echo $sub5; ?>" required>
+<input type="text" id="mk5" name="mark5" value="<?php echo $mk5; ?>" required>
+<input type="text" id="sub6" name="subject6" value="<?php echo $sub6; ?>" required>
+<input type="text" id="mk6" name="mark6" value="<?php echo $mk6; ?>" required>
+<input type="text" id="sub7" name="subject7" value="<?php echo $sub7; ?>" required>
+<input type="text" id="mk7" name="mark7" value="<?php echo $mk7; ?>" required>
+	
+	
+<!--Higher ed Info -->
+<input type="text" id="colname" name="collname" value="<?php echo $colname; ?>" required>
+<input type="text" id="fos" name="FOS" value="<?php echo $FOS; ?>" required>
+<input type="text" id="active" name="active" value="<?php echo $Active; ?>" required>
+<input type="text" id="comple" name="completed" value="<?php echo $compl; ?>" required>
+
+
+	
+<!--Emp His Info -->
+<input type="text" id="company" name="company" value="<?php echo $company; ?>" required>
+<input type="text" id="position" name="position" value="<?php echo $position; ?>" required>
+<input type="text" id="ref" name="reference" value="<?php echo $ref; ?>" required>
+<input type="text" id="refercon" name="refcontact" value="<?php echo $refcon; ?>" required>
+
+<!--Skills Info -->
+<input type="text" id="sk1" name="skill1" value="<?php echo $sk1; ?>" required>
+<input type="text" id="sk2" name="skill2" value="<?php echo $sk2; ?>" required>
+
+
+
+
+
