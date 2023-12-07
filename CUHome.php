@@ -105,6 +105,7 @@
         <a href="CompUserAccountPage.php">My Account</a>
 		<a href="TalentBoxPage.php">TalentBox</a>
 		<a href="PostJobs.php">Post Jobs</a>
+		<a href="ViewApplicants.php">My Jobs</a>
 		<a href="CreateTemplate.php">Create Template</a>
     </nav>
     </header>
