@@ -1,7 +1,37 @@
+<?php 
+session_start();
+if (isset($_SESSION['ruid'])) {
+  $ruid = $_SESSION['ruid'];
+
+    // Connection to the database
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $db = "talentforge";
+    $conn = mysqli_connect($servername, $username, $password, $db);
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+	$ruid=32;
+
+    // Fetch additional data from other tables
+	  $result = $conn->query("SELECT * FROM tblregusers WHERE RUID = '$ruid'");
+	  $userData = $result->fetch_assoc();
+	  
+    $skillsResult = $conn->query("SELECT * FROM tblskills WHERE RUID = '$ruid'");
+    $skillsData = $skillsResult->fetch_assoc();
+
+    $schoolInfoResult = $conn->query("SELECT * FROM tblschoolinfo WHERE RUID = '$ruid'");
+    $schoolInfoData = $schoolInfoResult->fetch_assoc();
+
+    $higheredResult = $conn->query("SELECT * FROM tblhighered WHERE RUID = '$ruid'");
+    $higheredData = $higheredResult->fetch_assoc();
+
+    $employeeHistoryResult = $conn->query("SELECT * FROM tblemployeehistory WHERE RUID = '$ruid'");
+    $employeeHistoryData = $employeeHistoryResult->fetch_assoc();
+  }
+?>
 <!DOCTYPE html>
-
-
-
 <html lang="en">
 
 <head>
@@ -127,7 +157,7 @@
     </nav>
 
     <div>
-        <h4>Select Template:</h4>
+        <h4>Select Template: <?php echo $userData['Name']; ?> </h4>
         <select id="templateSelector" onchange="changeTemplate()">
             <option>Please select a template</option>
             <option value="template1">Template 1</option>
@@ -221,44 +251,43 @@
 
     <div class="section">
       <div>
+	  <h1><?php echo $userData['Name']; ?></h1>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required>
+        <input type="text" id="firstName" name="firstName" value="<?php echo $userData['Name']; ?>" required readonly>
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" required>
+        <input type="text" id="lastName" name="lastName" value="<?php echo $userData['Surname']; ?>" required readonly>
       </div>
       <div class="field">
         <label for="dob">ID Number:</label>
-        <input type="text" id="idnum" name="idnum" required>
+        <input type="text" id="idnum" name="idnum" value="<?php echo $userData['IDNumber']; ?>" required readonly>
       </div>
     
       <div class="field">
         <label for="gender">Gender:</label>
-		 <input type="text" id="gender" name="gender" required>
+		 <input type="text" id="gender" name="gender" value="<?php echo $userData['Gender']; ?>" required readonly>
       </div>
       <div class="field">
         <label for="maritalStatus">Marital Status:</label>
-        <select id="maritalStatus" name="maritalStatus" required>
-           <input type="text" id="ms" name="ms" required>
+           <input type="text" id="ms" name="ms" value="<?php echo $userData['MaritalStatus']; ?>" required readonly>
         </select>
       </div>
       <div class="field">
         <label for="contactNumber">Contact Number:</label>
-        <input type="tel" id="contactNumber" name="contactNumber" required>
+        <input type="tel" id="contactNumber" name="contactNumber" value="<?php echo $userData['ContactNum']; ?>" required readonly>
       </div>
       <div class="field">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" value="<?php echo $userData['Email']; ?>" required readonly>
       </div>
       <div class="field">
         <label for="residentialAddress">Residential Address:</label>
-        <textarea id="residentialAddress" name="residentialAddress" rows="2" required></textarea>
+        <input id="residentialAddress" name="residentialAddress" rows="2" value="<?php echo $userData['ResAddress']; ?>" required readonly>
       </div>
       <div class="field">
         <label for="postalAddress">Postal Address:</label>
-        <textarea id="postalAddress" name="postalAddress" rows="2" required></textarea>
-      </div>
+        <input id="postalAddress" name="postalAddress" rows="2" value="<?php echo $userData['PostalAddress']; ?>" required readonly>
     </div>
 
 
