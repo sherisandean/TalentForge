@@ -15,7 +15,7 @@ if (isset($_SESSION['ruid'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-     // Fetch user data from tblcompusers based on RUID
+    // Fetch user data from tblcompusers based on RUID
     $result = $conn->query("SELECT * FROM tblregusers WHERE RUID = '$ruid'");
     if ($result->num_rows > 0) {
         $userData = $result->fetch_assoc();
@@ -38,12 +38,42 @@ if (isset($_SESSION['ruid'])) {
     $employeeHistoryResult = $conn->query("SELECT * FROM tblemployeehistory WHERE RUID = '$ruid'");
     $employeeHistoryData = $employeeHistoryResult->fetch_assoc();
 
+    // ... (Repeat for other tables)
+
     // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Start a transaction
-        $conn->begin_transaction();
+        if (isset($_POST['deleteAccount']) && $_POST['deleteAccount'] == 1) {
+            // Delete account logic here
+            $deleteUserQuery = "DELETE FROM tblregusers WHERE RUID = '$ruid'";
+            $deleteSkillsQuery = "DELETE FROM tblskills WHERE RUID = '$ruid'";
+            $deleteSchoolQuery = "DELETE FROM tblschoolinfo WHERE RUID = '$ruid'";
+            $deleteHigherEdQuery = "DELETE FROM tblhighered WHERE RUID = '$ruid'";
+            $deleteEmpHistQuery = "DELETE FROM tblemployeehistory WHERE RUID = '$ruid'";
 
-          // Fetch updated values from POST data
+            try {
+                // Execute the delete queries
+                $conn->query($deleteUserQuery);
+                $conn->query($deleteSkillsQuery);
+                $conn->query($deleteSchoolQuery);
+                $conn->query($deleteHigherEdQuery);
+                $conn->query($deleteEmpHistQuery);
+                
+
+                // Successful delete
+                echo "Account deleted successfully.";
+                header("Location: LoginPage.php");
+                exit();
+            } catch (Exception $e) {
+                // Handle error
+                echo "Error deleting account: " . $e->getMessage();
+                header("Location: RegUserAccountPage.php");
+                exit();
+            }
+        } else {
+            // Update logic here (replace the placeholder with your actual update logic)
+            $conn->begin_transaction();
+
+            // Fetch updated values from POST data
         $updatedName = $_POST['Name'];
         $updatedSurname = $_POST['Surname'];
         $updatedIDNumber = $_POST['IDNumber'];
@@ -82,8 +112,8 @@ if (isset($_SESSION['ruid'])) {
 		$updatedReference = $_POST['Reference'];
 		$updatedReferenceContact = $_POST['ReferenceContact'];
 
-        try {
-            // Update the user data in the tblregusers table
+            try {
+                // Update the user data in the tblregusers table
             $updateUserQuery = "UPDATE tblregusers SET 
                 Name = '$updatedName',
                 Surname = '$updatedSurname',
@@ -136,34 +166,23 @@ if (isset($_SESSION['ruid'])) {
 		        Reference='$updatedReference',
 		        ReferenceContact='$updatedReferenceContact'
                 WHERE RUID = '$ruid'";			
-			
 
-            // Execute the update queries
-            $conn->query($updateUserQuery);
-			
-            $conn->query($updateSkillsQuery);
-			
-            $conn->query($updateSchoolInfoQuery);
-			
-			$conn->query($updateHigherEdQuery);
-			
-			$conn->query($updateEmpHistoryQuery);
-			//$conn->commit();
-          
+                // Commit the transaction
+                $conn->commit();
 
-            
-            // Successful update
-            echo "Record updated successfully.";
-            header("Location: RUHome.php");
-            exit();
-        } catch (Exception $e) {
-            // Rollback the transaction on error
-            $conn->rollback();
+                // Successful update
+                echo "Record updated successfully.";
+                header("Location: RUHome.php");
+                exit();
+            } catch (Exception $e) {
+                // Rollback the transaction on error
+                $conn->rollback();
 
-            // Handle error
-            echo "Error updating record: " . $e->getMessage();
-            header("Location: RegUserAccountPage.php");
-            exit();
+                // Handle error
+                echo "Error updating record: " . $e->getMessage();
+                header("Location: RegUserAccountPage.php");
+                exit();
+            }
         }
     }
 } else {
@@ -207,6 +226,34 @@ if (isset($_SESSION['ruid'])) {
             cursor: pointer;
             width: 100%;
         }
+         
+		 button[type="button1"] {
+            background-color: #000000;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="button2"]:hover {
+            opacity: 0.8;
+        }
+		
+		 button[type="button2"] {
+            background-color: #FF0000;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="button2"]:hover {
+            opacity: 0.8;
+        }
 
         button[type="submit"]:hover {
             opacity: 0.8;
@@ -240,6 +287,14 @@ if (isset($_SESSION['ruid'])) {
         }
     </style>
     <script>
+	     function showDeleteConfirmation() {
+            var confirmed = confirm("Are you sure you want to delete your account?");
+            if (confirmed) {
+                // If user clicks 'OK', submit the form with an additional parameter
+                document.getElementById("deleteForm").submit();
+            }
+        }
+	
         function enableEdit() {
             var inputs = document.querySelectorAll('input[type="text"]');
             var hiddenInputs = document.querySelectorAll('input[type="hidden"]');
@@ -443,10 +498,11 @@ if (isset($_SESSION['ruid'])) {
         <input type="hidden" id="updatedPosition" name="updatedPosition" value="<?php echo $employeeHistoryData['Position']; ?>">
         <input type="hidden" id="updatedReference" name="updatedReference" value="<?php echo $employeeHistoryData['Reference']; ?>">
         <input type="hidden" id="updatedReferenceContact" name="updatedReferenceContact" value="<?php echo $employeeHistoryData['ReferenceContact']; ?>">
+        <input type="hidden" name="deleteAccount" value="1">
 
-
-        <button type="button" onclick="enableEdit()">Edit</button>
+        <button type="button1" onclick="enableEdit()">Edit</button>
         <button type="submit" disabled>Save Changes</button>
+		 <button type="button2" onclick="showDeleteConfirmation()">Delete Account</button>
     </form>
 </body>
 </html>
