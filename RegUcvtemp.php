@@ -1,121 +1,3 @@
-
-
-
-<!DOCTYPE html>
-
-<?php
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-?>
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV template selection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-	
-	 #pdfButton {
-    background-color: #4B0082;
-    color: white;
-    padding: 12px 24px; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px; 
-}
-
- #pdfButton:hover {
-    background-color: #bf55ec;
-         }
-
-        .cv {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 36px;
-            color: #333;
-        }
-
-        .field {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .nav-item {
-            list-style-type: none;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            background-color: #444;
-            padding: 10px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
-	
-	
-	
-	
-	  <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
-</head>
-
-
 <?php
 if (isset($_SESSION['ruid'])) {
     $ruid = $_SESSION['ruid'];
@@ -239,6 +121,124 @@ $conn->close();
 }
 
 ?>
+
+
+<!DOCTYPE html>
+
+<?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+?>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV template selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+	
+	 #pdfButton {
+    background-color: #4B0082;
+    color: white;
+    padding: 12px 24px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; 
+}
+
+ #pdfButton:hover {
+    background-color: #bf55ec;
+         }
+
+        .cv {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #333;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .nav-item {
+            list-style-type: none;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+	
+	
+	
+	
+	  <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+</head>
+
+
+
 
 
 
