@@ -94,7 +94,9 @@ if (isset($_SESSION['cuid'])) {
             box-sizing: border-box;
         }
 
-        button[type="submit"] {
+        button[type="submit"],
+        button[type="button"][onclick="confirmDelete()"],
+        button[type="button"][onclick="enableEdit()"]{
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
@@ -104,37 +106,19 @@ if (isset($_SESSION['cuid'])) {
             width: 100%;
         }
 
-        button[type="submit"]:hover {
+        button[type="submit"]:hover,
+        button[type="button"][onclick="confirmDelete()"]:hover {
             opacity: 0.8;
-        }
-		
-		 button[type="button1"] {
-            background-color: #000000;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
         }
 
-        button[type="button2"]:hover {
-            opacity: 0.8;
-        }
-		
-		 button[type="button2"] {
-            background-color: #FF0000;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
+        button[type="button"][onclick="enableEdit()"] {
+            background-color: black;
         }
 
-        button[type="button2"]:hover {
-            opacity: 0.8;
+        button[type="button"][onclick="confirmDelete()"] {
+            background-color: red;
         }
+		
 		
 		.nav-item {
         list-style-type: none;
@@ -164,40 +148,43 @@ if (isset($_SESSION['cuid'])) {
         }
     </style>
     <script>
-        function enableEdit() {
-            var inputs = document.querySelectorAll('input[type="text"]');
-            var hiddenInputs = document.querySelectorAll('input[type="hidden"]');
-            var saveChangesButton = document.querySelector('button[type="submit"]');
+    function enableEdit() {
+        var inputs = document.querySelectorAll('input[type="text"]');
+        var hiddenInputs = document.querySelectorAll('input[type="hidden"]');
+        var saveChangesButton = document.querySelector('button[type="submit"]');
 
-            // Enable inputs
-            inputs.forEach(function (input) {
-                input.removeAttribute('readonly');
-            });
+        // Enable inputs
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
 
-            // Update hidden inputs with current values
-            hiddenInputs.forEach(function (hiddenInput) {
-                var fieldName = hiddenInput.id.replace("updated", "");
-                hiddenInput.value = document.getElementById(fieldName).value;
-            });
+        // Update hidden inputs with current values
+        hiddenInputs.forEach(function (hiddenInput) {
+            var fieldName = hiddenInput.id.replace("updated", "");
+            hiddenInput.value = document.getElementById(fieldName).value;
+        });
 
-            // Enable the Save Changes button
-            saveChangesButton.removeAttribute('disabled');
-        }
+        // Enable the Save Changes button
+        saveChangesButton.removeAttribute('disabled');
 
-        function disableEdit() {
-            var inputs = document.querySelectorAll('input[type="text"]');
-            var saveChangesButton = document.querySelector('button[type="submit"]');
+    }
 
-            // Disable inputs
-            inputs.forEach(function (input) {
-                input.setAttribute('readonly', true);
-            });
+    function disableEdit() {
+        var inputs = document.querySelectorAll('input[type="text"]');
+        var saveChangesButton = document.querySelector('button[type="submit"]');
 
-            // Disable the Save Changes button
-            saveChangesButton.setAttribute('disabled', true);
-        }
-		
-		 function confirmDelete() {
+        // Disable inputs
+        inputs.forEach(function (input) {
+            input.setAttribute('readonly', true);
+        });
+
+        // Disable the Save Changes button
+        saveChangesButton.setAttribute('disabled', true);
+
+       
+    }
+
+    function confirmDelete() {
         var result = confirm("Are you sure you want to delete your account?");
         if (result) {
             // If user clicks 'OK', proceed with deletion
@@ -226,8 +213,9 @@ if (isset($_SESSION['cuid'])) {
         xhr.open("POST", "deleteAccount.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send("cuid=<?php echo $cuid; ?>");
-	}
-    </script>
+    }
+</script>
+
 </head>
 <header>
   <nav>
@@ -271,9 +259,9 @@ if (isset($_SESSION['cuid'])) {
         <input type="hidden" id="updatedEmail" name="updatedEmail" value="<?php echo $userData['Email']; ?>">
         <input type="hidden" id="updatedPassword" name="updatedPassword" value="<?php echo $userData['Password']; ?>">
 
-        <button type="button1" onclick="enableEdit()">Edit</button>
+        <button type="button" onclick="enableEdit()">Edit</button>
         <button type="submit" disabled>Save Changes</button>
-		<button type="button2" onclick="confirmDelete()">Delete Account</button>
+		<button type="button" onclick="confirmDelete()">Delete Account</button>
     </form>
 </body>
 </html>

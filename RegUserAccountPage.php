@@ -217,7 +217,9 @@ if (isset($_SESSION['ruid'])) {
             box-sizing: border-box;
         }
 
-        button[type="submit"] {
+        button[type="submit"],
+        button[type="button"][onclick="showDeleteConfirmation()"],
+        button[type="button"][onclick="enableEdit()"]{
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
@@ -226,38 +228,20 @@ if (isset($_SESSION['ruid'])) {
             cursor: pointer;
             width: 100%;
         }
-         
-		 button[type="button1"] {
-            background-color: #000000;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
+
+        button[type="submit"]:hover,
+        button[type="button"][onclick="confirmDelete()"]:hover {
+            opacity: 0.8;
         }
 
-        button[type="button2"]:hover {
-            opacity: 0.8;
+        button[type="button"][onclick="enableEdit()"] {
+            background-color: black;
+        }
+
+        button[type="button"][onclick="confirmDelete()"] {
+            background-color: red;
         }
 		
-		 button[type="button2"] {
-            background-color: #FF0000;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button[type="button2"]:hover {
-            opacity: 0.8;
-        }
-
-        button[type="submit"]:hover {
-            opacity: 0.8;
-        }
 		
 		.nav-item {
         list-style-type: none;
@@ -500,9 +484,9 @@ if (isset($_SESSION['ruid'])) {
         <input type="hidden" id="updatedReferenceContact" name="updatedReferenceContact" value="<?php echo $employeeHistoryData['ReferenceContact']; ?>">
         <input type="hidden" name="deleteAccount" value="1">
 
-        <button type="button1" onclick="enableEdit()">Edit</button>
+        <button type="button" onclick="enableEdit()">Edit</button>
         <button type="submit" disabled>Save Changes</button>
-		 <button type="button2" onclick="showDeleteConfirmation()">Delete Account</button>
+		 <button type="button" onclick="showDeleteConfirmation()">Delete Account</button>
     </form>
 </body>
 </html>
