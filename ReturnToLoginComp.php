@@ -3,7 +3,7 @@
 $servername="localhost";
 $username="root";
 $password ="";
-$db="talentforge";
+$db="talentforgedb";
 $conn = mysqli_connect($servername, $username, $password, $db);
 if (!$conn){
 die("Connection fa1led:" . mysqli_connect_error ());

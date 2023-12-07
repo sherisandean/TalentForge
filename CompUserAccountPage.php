@@ -108,6 +108,34 @@ if (isset($_SESSION['cuid'])) {
             opacity: 0.8;
         }
 		
+		 button[type="button1"] {
+            background-color: #000000;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="button2"]:hover {
+            opacity: 0.8;
+        }
+		
+		 button[type="button2"] {
+            background-color: #FF0000;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="button2"]:hover {
+            opacity: 0.8;
+        }
+		
 		.nav-item {
         list-style-type: none;
     }
@@ -168,6 +196,37 @@ if (isset($_SESSION['cuid'])) {
             // Disable the Save Changes button
             saveChangesButton.setAttribute('disabled', true);
         }
+		
+		 function confirmDelete() {
+        var result = confirm("Are you sure you want to delete your account?");
+        if (result) {
+            // If user clicks 'OK', proceed with deletion
+            deleteAccount();
+        }
+    }
+
+    // Add this JavaScript function to send an AJAX request for account deletion
+    function deleteAccount() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response if needed
+                var response = xhr.responseText;
+                if (response === "success") {
+                    alert("Account deleted successfully.");
+                    // Redirect or perform any other action after deletion
+                    window.location.href = "LoginPage.php";
+                } else {
+                    alert("Error deleting account.");
+                }
+            }
+        };
+
+        // Send an AJAX request to the PHP script that handles account deletion
+        xhr.open("POST", "deleteAccount.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("cuid=<?php echo $cuid; ?>");
+	}
     </script>
 </head>
 <header>
@@ -212,8 +271,9 @@ if (isset($_SESSION['cuid'])) {
         <input type="hidden" id="updatedEmail" name="updatedEmail" value="<?php echo $userData['Email']; ?>">
         <input type="hidden" id="updatedPassword" name="updatedPassword" value="<?php echo $userData['Password']; ?>">
 
-        <button type="button" onclick="enableEdit()">Edit</button>
+        <button type="button1" onclick="enableEdit()">Edit</button>
         <button type="submit" disabled>Save Changes</button>
+		<button type="button2" onclick="confirmDelete()">Delete Account</button>
     </form>
 </body>
 </html>
