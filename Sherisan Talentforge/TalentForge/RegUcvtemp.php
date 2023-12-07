@@ -2,7 +2,6 @@
 session_start();
 if (isset($_SESSION['ruid'])) {
   $ruid = $_SESSION['ruid'];
-
     // Connection to the database
     $servername = "localhost";
     $username = "root";
@@ -12,10 +11,10 @@ if (isset($_SESSION['ruid'])) {
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
+	
     // Fetch additional data from other tables
-	  $result = $conn->query("SELECT * FROM tblregusers WHERE RUID = '$ruid'");
-	  $userData = $result->fetch_assoc();
+	$result = $conn->query("SELECT * FROM tblregusers WHERE RUID = '$ruid'");
+	$userData = $result->fetch_assoc();
 	  
     $skillsResult = $conn->query("SELECT * FROM tblskills WHERE RUID = '$ruid'");
     $skillsData = $skillsResult->fetch_assoc();
@@ -28,7 +27,7 @@ if (isset($_SESSION['ruid'])) {
 
     $employeeHistoryResult = $conn->query("SELECT * FROM tblemployeehistory WHERE RUID = '$ruid'");
     $employeeHistoryData = $employeeHistoryResult->fetch_assoc();
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -244,7 +243,7 @@ if (isset($_SESSION['ruid'])) {
 
 <div class="cv" id="CVtemp1">
   <div class="header">
-    <h1>CV FOR Your Name</h1>
+    <h1>CV FOR Your <?php echo $userData['Name']; ?></h1>
     
   </div>
 
@@ -294,58 +293,58 @@ if (isset($_SESSION['ruid'])) {
     <h2>Education</h2>
     <div class="field">
       <label for="school">Latest School Attended:</label>
-      <input type="text" id="school" name="school" required>
+      <input type="text" id="school" name="school"value="<?php echo $schoolInfoData['LastSchool']; ?>" required readonly>
     </div>
     <div class="field">
       <label for="grade">Highest Grade Passed:</label>
-      <input type="text" id="grade" name="grade" required>
+      <input type="text" id="grade" name="grade" value= "<?php echo $schoolInfoData['highestGrade']; ?>" required readonly> 
     </div>
     <div class="field">
       <label for="finalYear">Final Year of Schooling:</label>
-      <input type="text" id="finalYear" name="finalYear" required>
+      <input type="text" id="finalYear" name="finalYear" value="<?php echo $schoolInfoData['finalYear']; ?>"  required>
     </div>
 
     <!-- Fields for each subject and its marks -->
     <div class="field">
       <label for="subject1">Subject 1:</label>
-      <input type="text" id="subject1" name="subject1" placeholder="Enter subject name">
-      <input type="text" id="marks1" name="marks1" placeholder="Enter marks">
+      <input type="text" id="subject1" name="subject1" value="<?php echo $schoolInfoData['Subject1']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks1" name="marks1" value="<?php echo $schoolInfoData['Mark1']; ?> "placeholder="Enter marks">
     </div>
 
     <div class="field">
       <label for="subject2">Subject 2:</label>
-      <input type="text" id="subject2" name="subject2" placeholder="Enter subject name">
-      <input type="text" id="marks2" name="marks2" placeholder="Enter marks">
+      <input type="text" id="subject2" name="subject2" value="<?php echo $schoolInfoData['Subject2']; ?>" placeholder="Enter subject name">
+      <input type="text" id="marks2" name="marks2" value="<?php echo $schoolInfoData['Mark2']; ?>" placeholder="Enter marks">
     </div>
 
     <div class="field">
       <label for="subject3">Subject 3:</label>
-      <input type="text" id="subject3" name="subject3" placeholder="Enter subject name">
-      <input type="text" id="marks3" name="marks3" placeholder="Enter marks">
+      <input type="text" id="subject3" name="subject3" value="<?php echo $schoolInfoData['Subject3']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks3" name="marks3" value="<?php echo $schoolInfoData['Mark1']; ?>" placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject4">Subject 4:</label>
-      <input type="text" id="subject4" name="subject4" placeholder="Enter subject name">
-      <input type="text" id="marks4" name="marks4" placeholder="Enter marks">
+      <input type="text" id="subject4" name="subject4" value="<?php echo $schoolInfoData['Subject4']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks4" name="marks4" value="<?php echo $schoolInfoData['Mark1']; ?> "placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject5">Subject 5:</label>
-      <input type="text" id="subject5" name="subject5" placeholder="Enter subject name">
-      <input type="text" id="marks5" name="marks5" placeholder="Enter marks">
+      <input type="text" id="subject5" name="subject5" value="<?php echo $schoolInfoData['Subject5']; ?>" placeholder="Enter subject name">
+      <input type="text" id="marks5" name="marks5" value="<?php echo $schoolInfoData['Mark5']; ?> "placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject6">Subject 6:</label>
-      <input type="text" id="subject6" name="subject6" placeholder="Enter subject name">
-      <input type="text" id="marks6" name="marks6" placeholder="Enter marks">
+      <input type="text" id="subject6" name="subject6" value="<?php echo $schoolInfoData['Subject6']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks6" name="marks6" value="<?php echo $schoolInfoData['Mark6']; ?>" placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject7">Subject 7:</label>
-      <input type="text" id="subject7" name="subject7" placeholder="Enter subject name">
-      <input type="text" id="marks7" name="marks7" placeholder="Enter marks">
+      <input type="text" id="subject7" name="subject7" value="<?php echo $schoolInfoData['Subject7']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks7" name="marks7" value="<?php echo $schoolInfoData['Mark7']; ?> "placeholder="Enter marks">
     </div>
 
   </div>
@@ -354,23 +353,17 @@ if (isset($_SESSION['ruid'])) {
     <h2>Higher Education</h2>
     <div class="field">
       <label for="college">College or University Name:</label>
-      <input type="text" id="college" name="college" required>
-    </div>
-    <div class="field">
-      <label for="location">College or University Location:</label>
-      <input type="text" id="location" name="location" required>
+      <input type="text" id="college" value="<?php echo $higheredData['collegeName']; ?>" name="college" required>
     </div>
     <div class="field">
       <label for="fieldOfStudy">Field of Study:</label>
-      <input type="text" id="fieldOfStudy" name="fieldOfStudy" placeholder="What is your elective or major" required>
+      <input type="text" id="fieldOfStudy" name="fieldOfStudy" value="<?php echo $higheredData['fieldOfStudy']; ?> "placeholder="What is your elective or major" required>
     </div>
 
     <div class="field">
       <label for="completionStatus">Tertiary Study Completion Status:</label>
-      <select id="completionStatus" name="completionStatus">
-        <option value="ongoing">Ongoing</option>
-        <option value="completed">Completed</option>
-      </select>
+	<input type="text" id="completionStatus" name="completionStatus" value="<?php echo $higheredData['Completed']; ?>" placeholder="completionStatus" required>
+    
     </div>
   </div>
   
@@ -382,17 +375,14 @@ if (isset($_SESSION['ruid'])) {
    
     <div class="field">
       <label for="jobTitle1">Job Title 1:</label>
-      <input type="text" id="jobTitle1" name="jobTitle1" placeholder="Enter job title">
-      <input type="text" id="company1" name="company1" placeholder="Enter company name">
-      <input type="text" id="year1" name="year1" placeholder="Enter year">
+      <input type="text" id="jobTitle1" name="jobTitle1" value="<?php echo $employeeHistoryData['Position'];?>" required readonly >
+      <input type="text" id="company1" name="company1" value="<?php echo $employeeHistoryData['Company']; ?>"  >
+      <input type="text" id="Reference" name="Reference" value="<?php echo $employeeHistoryData['Reference']; ?>"  >
+	        <input type="text" id="ReferenceContact" name="ReferenceContact" value="<?php echo $employeeHistoryData['ReferenceContact']; ?> " >
+
     </div>
 
-    <div class="field">
-      <label for="jobTitle2">Job Title 2:</label>
-      <input type="text" id="jobTitle2" name="jobTitle2" placeholder="Enter job title">
-      <input type="text" id="company2" name="company2" placeholder="Enter company name">
-      <input type="text" id="year2" name="year2" placeholder="Enter year">
-    </div>
+
 
     
 
@@ -403,25 +393,16 @@ if (isset($_SESSION['ruid'])) {
   
     <div class="field">
       <label for="skill1">Skill 1:</label>
-      <input type="text" id="skill1" name="skill1" placeholder="Enter skill">
+      <input type="text" id="skill1" name="skill1" value="<?php echo $skillsData['skill1']; ?> " >
     </div>
 
     <div class="field">
       <label for="skill2">Skill 2:</label>
-      <input type="text" id="skill2" name="skill2" placeholder="Enter skill">
+      <input type="text" id="skill2" name="skill2" value="<?php echo $skillsData['skill2']; ?> ">
     </div>
 
   
 
-  </div>
-  
-  
-  
-  
-
-  <div class="section personal-statement">
-    <h2>Personal Statement</h2>
-    <textarea id="personalStatement" name="personalStatement" rows="4" placeholder="Write a brief personal statement"></textarea>
   </div>
 
 
@@ -500,190 +481,146 @@ if (isset($_SESSION['ruid'])) {
     <div class="header2">
       <h1>Professional CV</h1>
 	  <div class="header2">
-    <h1>Curriculum Vitae Your Name</h1>
+    <h1>Curriculum Vitae Your <?php echo $userData['Name']; ?></h1>
     
   </div>
 
     <div class="section">
       <div>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required>
+        <input type="text" id="firstName" name="firstName" value="<?php echo $userData['Name']; ?>"  required>
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" required>
+        <input type="text" id="lastName" name="lastName" value="<?php echo $userData['Surname']; ?>" required>
       </div>
       <div class="field">
         <label for="dob">ID number</label>
-        <input type="text" id="idnum" name="idnumber" required>
+        <input type="text" id="idnum" name="idnumber"  value="<?php echo $userData['IDNumber']; ?>" required>
       </div>
       <div class="field">
         <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+    <input type="text" id="Gender" name="Gender"     <input type="text" id="Gender" name="Gender" value="<?php echo $userData['Gender']; ?>"  required>    
       </div>
       <div class="field">
         <label for="maritalStatus">Marital Status:</label>
-        <select id="maritalStatus" name="maritalStatus" required>
-          <option value="single">Single</option>
-          <option value="married">Married</option>
-        </select>
+    <input type="text" id="maritalStatus" name="maritalStatus" value="<?php echo $userData['MaritalStatus']; ?>" required>
+
       </div>
       <div class="field">
         <label for="contactNumber">Contact Number:</label>
-        <input type="tel" id="contactNumber" name="contactNumber" required>
+        <input type="tel" id="contactNumber" name="contactNumber" value="<?php echo $userData['ContactNum']; ?>" required>
       </div>
       <div class="field">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" value="<?php echo $userData['Email']; ?>"  required>
       </div>
       <div class="field">
         <label for="residentialAddress">Residential Address:</label>
-        <textarea id="residentialAddress" name="residentialAddress" rows="2" required></textarea>
+        <textarea id="residentialAddress" name="residentialAddress" rows="2" required><?php echo $userData['ResAddress']; ?></textarea>
       </div>
       <div class="field">
         <label for="postalAddress">Postal Address:</label>
-        <textarea id="postalAddress" name="postalAddress" rows="2" required></textarea>
+        <textarea id="postalAddress" name="postalAddress" rows="2" required><?php echo $userData['PostalAddress']; ?></textarea>
       </div>
     </div>
 
 
   <div class="section">
-    <h2>Education</h2>
+   <h2>Education</h2>
     <div class="field">
       <label for="school">Latest School Attended:</label>
-      <input type="text" id="school" name="school" required>
+      <input type="text" id="school" name="school"value="<?php echo $schoolInfoData['LastSchool']; ?>" required readonly>
     </div>
     <div class="field">
       <label for="grade">Highest Grade Passed:</label>
-      <input type="text" id="grade" name="grade" required>
+      <input type="text" id="grade" name="grade" value= "<?php echo $schoolInfoData['highestGrade']; ?>" required readonly> 
     </div>
     <div class="field">
       <label for="finalYear">Final Year of Schooling:</label>
-      <input type="text" id="finalYear" name="finalYear" required>
+      <input type="text" id="finalYear" name="finalYear" value="<?php echo $schoolInfoData['finalYear']; ?>"  required>
     </div>
 
-    
+    <!-- Fields for each subject and its marks -->
     <div class="field">
       <label for="subject1">Subject 1:</label>
-      <input type="text" id="subject1" name="subject1" placeholder="Enter subject name">
-      <input type="text" id="marks1" name="marks1" placeholder="Enter marks">
+      <input type="text" id="subject1" name="subject1" value="<?php echo $schoolInfoData['Subject1']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks1" name="marks1" value="<?php echo $schoolInfoData['Mark1']; ?> "placeholder="Enter marks">
     </div>
 
     <div class="field">
       <label for="subject2">Subject 2:</label>
-      <input type="text" id="subject2" name="subject2" placeholder="Enter subject name">
-      <input type="text" id="marks2" name="marks2" placeholder="Enter marks">
+      <input type="text" id="subject2" name="subject2" value="<?php echo $schoolInfoData['Subject2']; ?>" placeholder="Enter subject name">
+      <input type="text" id="marks2" name="marks2" value="<?php echo $schoolInfoData['Mark2']; ?>" placeholder="Enter marks">
     </div>
 
     <div class="field">
       <label for="subject3">Subject 3:</label>
-      <input type="text" id="subject3" name="subject3" placeholder="Enter subject name">
-      <input type="text" id="marks3" name="marks3" placeholder="Enter marks">
+      <input type="text" id="subject3" name="subject3" value="<?php echo $schoolInfoData['Subject3']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks3" name="marks3" value="<?php echo $schoolInfoData['Mark1']; ?>" placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject4">Subject 4:</label>
-      <input type="text" id="subject4" name="subject4" placeholder="Enter subject name">
-      <input type="text" id="marks4" name="marks4" placeholder="Enter marks">
+      <input type="text" id="subject4" name="subject4" value="<?php echo $schoolInfoData['Subject4']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks4" name="marks4" value="<?php echo $schoolInfoData['Mark1']; ?> "placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject5">Subject 5:</label>
-      <input type="text" id="subject5" name="subject5" placeholder="Enter subject name">
-      <input type="text" id="marks5" name="marks5" placeholder="Enter marks">
+      <input type="text" id="subject5" name="subject5" value="<?php echo $schoolInfoData['Subject5']; ?>" placeholder="Enter subject name">
+      <input type="text" id="marks5" name="marks5" value="<?php echo $schoolInfoData['Mark5']; ?> "placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject6">Subject 6:</label>
-      <input type="text" id="subject6" name="subject6" placeholder="Enter subject name">
-      <input type="text" id="marks6" name="marks6" placeholder="Enter marks">
+      <input type="text" id="subject6" name="subject6" value="<?php echo $schoolInfoData['Subject6']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks6" name="marks6" value="<?php echo $schoolInfoData['Mark6']; ?>" placeholder="Enter marks">
     </div>
 	
 	<div class="field">
       <label for="subject7">Subject 7:</label>
-      <input type="text" id="subject7" name="subject7" placeholder="Enter subject name">
-      <input type="text" id="marks7" name="marks7" placeholder="Enter marks">
+      <input type="text" id="subject7" name="subject7" value="<?php echo $schoolInfoData['Subject7']; ?> "placeholder="Enter subject name">
+      <input type="text" id="marks7" name="marks7" value="<?php echo $schoolInfoData['Mark7']; ?> "placeholder="Enter marks">
     </div>
 
-  </div>
-  
-  <div class="section">
-    <h2>Higher Education</h2>
-    <div class="field">
-      <label for="college">College or University Name:</label>
-      <input type="text" id="college" name="college" required>
-    </div>
-    <div class="field">
-      <label for="location">College or University Location:</label>
-      <input type="text" id="location" name="location" required>
-    </div>
-    <div class="field">
-      <label for="fieldOfStudy">Field of Study:</label>
-      <input type="text" id="fieldOfStudy" name="fieldOfStudy" placeholder="What is your elective or major" required>
-    </div>
-
-    <div class="field">
-      <label for="completionStatus">Tertiary Study Completion Status:</label>
-      <select id="completionStatus" name="completionStatus">
-        <option value="ongoing">Ongoing</option>
-        <option value="completed">Completed</option>
-		<option value="dns">Did not study</option>
-      </select>
-    </div>
   </div>
   
   
   
 
   <div class="section">
-    <h2>Experience</h2>
+     <h2>Experience</h2>
    
-     <div class="field">
-      <label for="jobTitle1">latest job experience</label>
-      <input type="text" id="position" name="position" placeholder="Enter your position">
-      <input type="text" id="company1" name="company1" placeholder="Enter company name">
-      <input type="text" id="ref" name="reference" placeholder="Enter your reference ">
-	  <input type="text" id="refcon" name="referencecontact" placeholder="reference contact @email/cell ">
+    <div class="field">
+      <label for="jobTitle1">Job Title 1:</label>
+      <input type="text" id="jobTitle1" name="jobTitle1" value="<?php echo $employeeHistoryData['Position'];?>" required readonly >
+      <input type="text" id="company1" name="company1" value="<?php echo $employeeHistoryData['Company']; ?>"  >
+      <input type="text" id="Reference" name="Reference" value="<?php echo $employeeHistoryData['Reference']; ?>"  >
+	        <input type="text" id="ReferenceContact" name="ReferenceContact" value="<?php echo $employeeHistoryData['ReferenceContact']; ?> " >
+
     </div>
 
   
   </div>
 
   <div class="section">
-    <h2>Skills</h2>
+   <h2>Skills</h2>
   
     <div class="field">
       <label for="skill1">Skill 1:</label>
-      <input type="text" id="skill1" name="skill1" placeholder="Enter skill">
+      <input type="text" id="skill1" name="skill1" value="<?php echo $skillsData['skill1']; ?> " >
     </div>
 
     <div class="field">
       <label for="skill2">Skill 2:</label>
-      <input type="text" id="skill2" name="skill2" placeholder="Enter skill">
+      <input type="text" id="skill2" name="skill2" value="<?php echo $skillsData['skill2']; ?> ">
     </div>
-	
-	<div class="field">
-      <label for="skill2">Skill 3:</label>
-      <input type="text" id="skill3" name="skill3" placeholder="Enter skill">
-    </div>
-	
-	<div class="field">
-      <label for="skill2">Skill 4:</label>
-      <input type="text" id="skill4" name="skill4" placeholder="Enter skill">
-    </div>
-  </div>
     
   </div>
 
   </div>
   
- <div class="section personal-statement">
-    <h2>Personal Statement</h2>
-    <textarea id="personalStatement" name="personalStatement" rows="4" placeholder="Write a brief personal statement"></textarea>
-  </div>
 
 </div>
 	    	  
@@ -775,125 +712,75 @@ if (isset($_SESSION['ruid'])) {
 
 
     <header>
-        <h1>Your Name</h1>
+        <h1><?php echo $userData['Name']; ?></h1>
         <h2>Curriculum Vitae</h2>
     </header>
 
     <section>
         <h2>Personal Information</h2>
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required>
+        <input type="text" id="firstName" name="firstName" value="<?php echo $userData['Name']; ?>"  required>
 
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" required>
+        <input type="text" id="lastName" name="lastName" value="<?php echo $userData['Surname']; ?>" required>
 
         <label for="dob">ID Number:</label>
-        <input type="text" id="idnum" name="idnumber" placeholder="ID Number" required>
+        <input type="text" id="idnum" name="idnumber" placeholder="ID Number"  value="<?php echo $userData['IDNumber']; ?>" required>
 
         <label for="contactNumber">Contact Number:</label>
-        <input type="tel" id="contactNumber" name="contactNumber" required>
+        <input type="tel" id="contactNumber" name="contactNumber"  value="<?php echo $userData['IDNumber']; ?>"value="<?php echo $userData['ContactNum']; ?>" required>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" value="<?php echo $userData['Email']; ?>"  required>
 		
 		 <label for="maritalStatus">Marital Status:</label>
-        <select id="maritalStatus" name="maritalStatus" required>
-          <option value="single">Single</option>
-          <option value="married">Married</option>
+    <input type="text" id="maritalStatus" name="maritalStatus" value="<?php echo $userData['MaritalStatus']; ?>" required>
+
         </select>
 
         <label for="residentialAddress">Residential Address:</label>
-        <textarea id="residentialAddress" name="residentialAddress" rows="4" required></textarea>
+        <textarea id="residentialAddress" name="residentialAddress" rows="4" required><?php echo $userData['ResAddress']; ?></textarea>
 
         <label for="postalAddress">Postal Address:</label>
-        <textarea id="postalAddress" name="postalAddress" rows="4" required></textarea>
+        <textarea id="postalAddress" name="postalAddress" rows="4" required><?php echo $userData['PostalAddress']; ?></textarea>
     </section>
 
     <section>
-        <h2>Education</h2>
-        <label for="school">Latest School Attended:</label>
-        <input type="text" id="school" name="school" required>
-
-        <label for="grade">Highest Grade Passed:</label>
-        <input type="text" id="grade" name="grade" required>
-
-        <label for="year">Final Year of Schooling:</label>
-        <input type="text" id="year" name="year" required>
-
-        <h3>Subjects</h3>
         
-        <label for="subject1">Subject 1:</label>
-        <input type="text" id="subject1" name="subject1">
-
-
-        <label for="marks1">Marks for Subject 1:</label>
-        <input type="text" id="marks1" name="marks1">
-
-      
-        <label for="subject2">Subject 2:</label>
-        <input type="text" id="subject2" name="subject2">
-		
-		 <label for="marks1">Marks for Subject 2:</label>
-        <input type="text" id="marks2" name="marks2">
-
-       
-        <label for="subject3">Subject 3:</label>
-        <input type="text" id="subject3" name="subject3">
-
-        <label for="marks3">Marks for Subject 3:</label>
-        <input type="text" id="marks3" name="marks3">
-
-        <label for="subject4">Subject 4:</label>
-        <input type="text" id="subject4" name="subject4">
-
-        <label for="marks4">Marks for Subject 4:</label>
-        <input type="text" id="marks4" name="marks4">
-
-        <label for="subject5">Subject 5:</label>
-        <input type="text" id="subject5" name="subject5">
-
-        <label for="marks5">Marks for Subject 5:</label>
-        <input type="text" id="marks5" name="marks5">
-
-        <label for="subject6">Subject 6:</label>
-        <input type="text" id="subject6" name="subject6">
-
-        <label for="marks6">Marks for Subject 6:</label>
-        <input type="text" id="marks6" name="marks6">
-
-        <label for="subject7">Subject 7:</label>
-        <input type="text" id="subject7" name="subject7">
-
-        <label for="marks7">Marks for Subject 7:</label>
-        <input type="text" id="marks7" name="marks7">
     </section>
 
     <section>
         <h2>College</h2>
-        <label for="collegeName">College Name:</label>
-        <input type="text" id="collegeName" name="collegeName" required>
+          <div class="field">
+      <label for="college">College or University Name:</label>
+      <input type="text" id="college" value="<?php echo $higheredData['collegeName']; ?>" name="college" required>
+    </div>
+    <div class="field">
+      <label for="fieldOfStudy">Field of Study:</label>
+      <input type="text" id="fieldOfStudy" name="fieldOfStudy" value="<?php echo $higheredData['fieldOfStudy']; ?> "placeholder="What is your elective or major" required>
+    </div>
 
-        <label for="fieldOfStudy">Field of Study:</label>
-        <input type="text" id="fieldOfStudy" name="fieldOfStudy" required>
-
-        <label for="currentlyStudying">Currently Studying:</label>
-        <input type="checkbox" id="currentlyStudying" name="currentlyStudying">
-
-        <label for="completionYear">Year of Completion:</label>
-        <input type="text" id="completionYear" name="completionYear">
+    <div class="field">
+      <label for="completionStatus">Tertiary Study Completion Status:</label>
+	<input type="text" id="completionStatus" name="completionStatus" value="<?php echo $higheredData['Completed']; ?>" placeholder="completionStatus" required>
+    
+    </div>
     </section>
 	
 
   <div class="section">
-    <h2>Experience</h2>
+   
+ <h2>Experience</h2>
    
     <div class="field">
-      <label for="jobTitle1">latest job experience</label>
-      <input type="text" id="position" name="position" placeholder="Enter your position">
-      <input type="text" id="company1" name="company1" placeholder="Enter company name">
-      <input type="text" id="ref" name="reference" placeholder="Enter your reference ">
-	  <input type="text" id="refcon" name="referencecontact" placeholder="reference contact @email/cell ">
+      <label for="jobTitle1">Job Title 1:</label>
+      <input type="text" id="jobTitle1" name="jobTitle1" value="<?php echo $employeeHistoryData['Position'];?>" required readonly >
+      <input type="text" id="company1" name="company1" value="<?php echo $employeeHistoryData['Company']; ?>"  >
+      <input type="text" id="Reference" name="Reference" value="<?php echo $employeeHistoryData['Reference']; ?>"  >
+	        <input type="text" id="ReferenceContact" name="ReferenceContact" value="<?php echo $employeeHistoryData['ReferenceContact']; ?> " >
+
     </div>
+
 
   
   </div>
@@ -901,14 +788,15 @@ if (isset($_SESSION['ruid'])) {
   <div class="section">
     <h2>Skills</h2>
   
+  
     <div class="field">
       <label for="skill1">Skill 1:</label>
-      <input type="text" id="skill1" name="skill1" placeholder="Enter skill">
+      <input type="text" id="skill1" name="skill1" value="<?php echo $skillsData['skill1']; ?> " >
     </div>
 
     <div class="field">
       <label for="skill2">Skill 2:</label>
-      <input type="text" id="skill2" name="skill2" placeholder="Enter skill">
+      <input type="text" id="skill2" name="skill2" value="<?php echo $skillsData['skill2']; ?> ">
     </div>
 	
 
